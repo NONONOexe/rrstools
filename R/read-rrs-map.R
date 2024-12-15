@@ -6,20 +6,29 @@
 #'
 #' @name read_rrs_map
 #' @param gml Path to the GML file.
+#' @param scale_data Logical. If `TRUE`, coordinates are scaled up by a factor
+#'   of 1000 to match the simulation environment, and adjusted such that
+#'   the minimum x and y values are 0. (Default: `TRUE`)
 #' @return A list of `sf` objects: nodes, edges, buildings, and roads.
 #' @examples
-#' gml <- system.file("extdata", "map.gml", package = "rrstools")
+#' gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 #' map_data <- read_rrs_map(gml)
 #' map_data
 NULL
 
 # Parse nodes from the XML and return a sf object
-parse_nodes <- function(xml) {
+parse_nodes <- function(xml, scale_data) {
   nodes <- xml_find_all(xml, ".//gml:Node")
   coordinates <- strsplit(xml_text(nodes), ",")
 
   x <- as.numeric(sapply(coordinates, "[[", 1))
   y <- as.numeric(sapply(coordinates, "[[", 2))
+  if (scale_data) {
+    x <- x * 1000
+    y <- y * 1000
+    x <- x - min(x)
+    y <- y - min(y)
+  }
 
   return(st_as_sf(
     data.frame(id = xml_attr(nodes, "id"), x, y),
@@ -89,18 +98,21 @@ parse_faces <- function(xml, edge_sf, type = c("building", "road")) {
 # Read a GML map and extract nodes, edges, buildings, and roads
 #' @rdname read_rrs_map
 #' @export
-read_rrs_map <- function(gml) {
+read_rrs_map <- function(gml, scale_data = FALSE) {
   xml <- read_xml(gml)
 
-  node_sf <- parse_nodes(xml)
+  node_sf <- parse_nodes(xml, scale_data)
   edge_sf <- parse_edges(xml, node_sf)
   building_sf <- parse_faces(xml, edge_sf, "building")
   road_sf <- parse_faces(xml, edge_sf, "road")
 
-  return(list(
+  rrs_map <- list(
     nodes = node_sf,
     edges = edge_sf,
     buildings = building_sf,
     roads = road_sf
-  ))
+  )
+  class(rrs_map) <- c("rrs_map", "list")
+
+  return(rrs_map)
 }

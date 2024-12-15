@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom graphics par
 #' @importFrom sf st_as_sf
 #' @importFrom sf st_collection_extract
 #' @importFrom sf st_linestring

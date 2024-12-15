@@ -4,12 +4,21 @@
 \name{rrstools-package}
 \alias{rrstools}
 \alias{rrstools-package}
-\title{rrstools: What the Package Does (One Line, Title Case)}
+\title{rrstools: Tools for Analyzing RoboCupRescue Simulation Data}
 \description{
-What the package does (one paragraph).
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Provides functions for analyzing RoboCupRescue Simulation data.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://nononoexe.github.io/rrstools/}
+}
+
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Keisuke ANDO \email{ando@maslab.aitech.ac.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
 
 }
 \keyword{internal}
