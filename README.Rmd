@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+devtools::load_all()
 ```
 
 # rrstools <img src="man/figures/logo.png" align="right" height="138"/>
@@ -41,7 +42,7 @@ install.packages("rrstools")
 ### Using `pak`
 
 ``` r
-# install.packages("pak)
+# install.packages("pak")
 pak::pak("nononoexe/rrstools")
 ```
 
@@ -67,5 +68,4 @@ plot(map_data)
 
 ## Code of conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](https://nononoexe.github.io/rrstools/CODE_OF_CONDUCT.html).
-By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://nononoexe.github.io/rrstools/CODE_OF_CONDUCT.html). By participating in this project you agree to abide by its terms.

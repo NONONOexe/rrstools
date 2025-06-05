@@ -33,7 +33,7 @@ install.packages("rrstools")
 ### Using `pak`
 
 ``` r
-# install.packages("pak)
+# install.packages("pak")
 pak::pak("nononoexe/rrstools")
 ```
 
