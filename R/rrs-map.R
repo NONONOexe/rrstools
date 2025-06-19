@@ -20,7 +20,7 @@ plot.rrs_map <- function(x,
                          road_border       = "#121212",
                          background_colour = NA,
                          ...) {
-  par(...)
+  graphics::par(...)
   plot(
     x$buildings$geometry,
     col    = building_colour,
