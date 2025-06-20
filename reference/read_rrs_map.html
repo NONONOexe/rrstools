@@ -61,7 +61,9 @@ the minimum x and y values are 0. (Default: <code>TRUE</code>)</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of <code>sf</code> objects: nodes, edges, buildings, and roads.</p>
+    <p>A list of <code>sf</code> objects: nodes, edges, buildings, and roads.
+Also includes a sub-list <code>raw_parsed_data</code> containing the intermediate
+data frames from XML parsing.</p>
     </div>
 
     <div class="section level2">
@@ -69,7 +71,7 @@ the minimum x and y values are 0. (Default: <code>TRUE</code>)</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">gml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"map-test.gml"</span>, package <span class="op">=</span> <span class="st">"rrstools"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">map_data</span> <span class="op">&lt;-</span> <span class="fu">read_rrs_map</span><span class="op">(</span><span class="va">gml</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">map_data</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $nodes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $node_sf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 315 features and 1 field</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Attribute-geometry relationship: constant (1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POINT</span>
@@ -89,7 +91,7 @@ the minimum x and y values are 0. (Default: <code>TRUE</code>)</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9   8 POINT (73.16 36.84)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10  9    POINT (40 -3.16)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $edge_sf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 413 features and 1 field</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Attribute-geometry relationship: constant (1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: LINESTRING</span>
@@ -98,18 +100,18 @@ the minimum x and y values are 0. (Default: <code>TRUE</code>)</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     id                       geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  103 LINESTRING (76.84 36.84, 83...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  110 LINESTRING (76.84 3.16, 80 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  108 LINESTRING (83.16 43.16, 83...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  109 LINESTRING (-3.16 -3.16, 3....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  106 LINESTRING (76.84 3.16, 76....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  107 LINESTRING (83.16 3.16, 76....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  104 LINESTRING (103.16 60, 103....</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  119 LINESTRING (80 -3.16, 40 -3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  117 LINESTRING (42.16 103.16, 8...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 116 LINESTRING (76.84 36.84, 73...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  103 LINESTRING (83.16 43.16, 76...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  110 LINESTRING (80 -3.16, 76.84...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  108 LINESTRING (83.16 3.16, 83....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  109 LINESTRING (3.16 3.16, -3.1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  106 LINESTRING (76.84 36.84, 76...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  107 LINESTRING (76.84 3.16, 83....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  104 LINESTRING (103.16 2.24, 10...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  119 LINESTRING (40 -3.16, 80 -3...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  117 LINESTRING (81.31 103.16, 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 116 LINESTRING (73.16 36.84, 76...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $buildings</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $building_sf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 37 features and 1 field</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Attribute-geometry relationship: constant (1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POLYGON</span>
@@ -117,19 +119,19 @@ the minimum x and y values are 0. (Default: <code>TRUE</code>)</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -30 ymin: -20 xmax: 135 ymax: 121</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     id                       geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  956 POLYGON ((95 19, 95 17, 85 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  957 POLYGON ((95 16, 95 14, 95 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  958 POLYGON ((95 10, 95 9, 95 7...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  959 POLYGON ((68 7, 63 7, 56 7,...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  952 POLYGON ((85 40, 95 40, 95 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  953 POLYGON ((80 55, 80 44, 77 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  954 POLYGON ((95 31, 95 29, 85 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  955 POLYGON ((95 28, 95 26, 95 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  948 POLYGON ((85 64, 95 64, 95 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 949 POLYGON ((85 58, 95 58, 95 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      id                       geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 247 247 POLYGON ((-20 25, -30 30, -...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 248 248 POLYGON ((10 -20, 10 -10, 1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 249 249 POLYGON ((-30 40, -30 70, -...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 250 250 POLYGON ((92 95, 90 95, 90 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 251 251 POLYGON ((40 -20, 30 -20, 3...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 253 253 POLYGON ((42.16 103.16, 40 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 254 254 POLYGON ((135 50, 125 50, 1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 255 255 POLYGON ((105 5, 108 -8, 98...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 298 298 POLYGON ((-3.193 102.15, -1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 905 905 POLYGON ((18 76, 22 73, 22 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $roads</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $road_sf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 58 features and 1 field</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Attribute-geometry relationship: constant (1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POLYGON</span>
@@ -137,17 +139,1276 @@ the minimum x and y values are 0. (Default: <code>TRUE</code>)</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -11.2 ymin: -10 xmax: 103.16 ymax: 103.16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     id                       geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  275 POLYGON ((47 27, 53 34, 67 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  274 POLYGON ((99.56 -3.16, 80 -...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  273 POLYGON ((-3.16 80, 3 77, 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  279 POLYGON ((83.16 3.16, 80 -3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  278 POLYGON ((47 58, 45 68, 53 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  281 POLYGON ((3 84, 3 77, -3.16...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  280 POLYGON ((89.15 86.38, 84.1...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  258 POLYGON ((73.16 26.84, 67 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  259 POLYGON ((92.24 92.24, 84.1...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 256 POLYGON ((3 77, 3 84, 18 84...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      id                       geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 256 256 POLYGON ((3 77, 3 84, 18 84...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 257 257 POLYGON ((61 77, 59 83, 84....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 258 258 POLYGON ((73.16 26.84, 67 3...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 259 259 POLYGON ((92.24 92.24, 84.1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 262 262 POLYGON ((103.16 81.31, 96....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 263 263 POLYGON ((53 62, 45 68, 42....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 266 266 POLYGON ((76.84 36.84, 83.1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 268 268 POLYGON ((47 58, 53 62, 53 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 269 269 POLYGON ((73.16 36.84, 67 4...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 270 270 POLYGON ((49 77, 42 83, 59 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $raw_parsed_data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $raw_parsed_data$nodes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      id       x       y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     0  83.160  43.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     1  76.840  36.840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     2  76.840   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     3  83.160   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     4   3.160   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     5  -3.160  -3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     6  80.000  -3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     7  67.000  43.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     8  73.160  36.840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10    9  40.000  -3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   10  51.410  12.830</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   11  48.590   7.170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   13  40.000  11.460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   14 103.160  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   15  53.000  62.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   17  49.000  77.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   16  45.000  68.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   19  42.000  83.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   18 103.160   2.240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   21  -3.160  80.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   20   3.000  77.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   23  53.000  34.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   22  47.000  27.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   25  73.160  26.840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   24  67.000  34.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   27 103.160  81.310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   29  96.840  78.690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28   28  96.840   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   31  61.000  77.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   30  89.150  86.380</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31   34  81.310 103.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32   32  59.000  83.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33   33  78.690  96.840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34   38  31.410   7.170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35   39   3.000  97.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36   36  84.150  91.380</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37   37  28.590  12.830</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38   42  49.090  23.030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   43  40.000  20.300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40   40  92.240  92.240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41   41   3.000  84.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42   46  30.910  23.030</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43   44  50.910  16.970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44   45  29.090  16.970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45   51 105.000   5.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46   50  21.000  84.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47   49  19.040  76.840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48   48  47.000  58.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49   55 -20.000  50.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50   54  95.000 -10.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51   53  98.000 -20.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52   52 108.000  -8.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53   59 -30.000  40.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54   58 -10.000  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55   57 -10.000  60.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56   56 -20.000  60.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57   63  10.000 -10.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58   62 -10.000  50.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59   61 -10.000  40.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60   60 -30.000  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61   68 -20.000  25.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62   69 -10.000  30.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63   70 -20.000  35.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64   71  30.000 -20.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65  609   4.000  58.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66   64  10.000 -20.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67   65  20.000 -20.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68  615   3.048  55.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69   66  20.000 -10.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70  612   3.041  58.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71   67 -30.000  30.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72   76  40.000 101.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73  618  23.080  74.118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74   77  30.000 111.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75   78  40.000 121.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76   79  90.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77   72  30.000  -1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78   73  40.000  -1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79   74  40.000 -20.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80   75  50.000 111.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81  621  45.000  53.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82   85 -10.000 115.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83  627  47.000  57.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84   84 -10.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85   87 135.000  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86   86   0.000 105.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87  624  47.000  53.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88   81 100.000  90.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89   80  95.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90  630   7.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91   83 -20.000 105.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92   82  95.000  90.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93   93 100.000 105.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94   92 101.000  60.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95   95  99.560  -3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96  633   7.000  96.992</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97   94  90.000 105.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98  639  21.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99   89 125.000  50.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100  88 101.000  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101  91 125.000  60.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102 636   4.000  96.998</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103  90 135.000  50.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104 102  37.840 103.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105 100 101.212  -0.664</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106 101  42.160 103.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107  98  33.950  15.510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108  99 103.160  60.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109 582   3.156   5.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110  96  46.050  15.510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111  97  30.000  -3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112 585   5.000   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113 591   3.104  29.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114 594   3.098  32.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115 597   4.000  32.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116 600   4.000  29.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117 606   4.000  55.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118 687  95.000  74.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119 684  92.265  83.265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120 681  93.765  81.765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121 678  93.000  81.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122 675  91.500  82.500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123 672  60.000  96.880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124 702  96.840  68.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125 699  95.000  68.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126 696  96.840  74.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127 693  96.840  72.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128 690  95.000  72.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129 654  53.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130 648  41.000  83.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131 651  42.769  79.154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132 645  21.000  90.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133 642  18.000  84.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134 669  63.000  96.873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135 666  63.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136 660  49.000  96.903</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137 663  53.002  96.894</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138 657  49.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139 747  96.840  38.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140 744  96.840  40.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141 750  95.000  38.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142 738  96.840  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143 741  95.000  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144 762  96.840  28.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145 765  96.840  26.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146 753  95.000  31.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147 759  96.840  29.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148 756  96.840  31.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149 714  96.840  59.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150 717  96.840  58.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151 705  96.840  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152 708  95.000  61.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153 711  96.840  61.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154 729  96.840  49.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155 732  96.840  47.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156 735  96.840  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157 720  96.840  56.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158 723  95.000  56.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159 726  95.000  49.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160 822  76.999  43.099</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161 816  73.000  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162 819  72.999  43.059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163 828  54.000  77.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164 831  51.000  77.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165 825  54.000  76.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166 287  -2.170 103.119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167 286  -3.193 102.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168 804  63.000   7.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169 807  63.000   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170 801  68.000   7.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171 813  77.000  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172 810  68.000   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173 305  -3.160  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174 789  95.000   7.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175 786  95.000  14.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176 308  -3.160  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177 798  96.840   7.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178 315 -11.200  29.400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179 795  96.840   9.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 180 792  95.000   9.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181 318 -11.200  30.600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182 774  96.840  19.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183 771  95.000  19.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184 768  95.000  26.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185 783  96.840  14.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186 780  96.840  16.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187 299 -10.000  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188 302 -10.000  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189 777  96.840  17.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190 881  38.000   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191 343  10.000  -3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192 340  13.000  -3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193 884  42.000   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194 337  13.000 -10.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195 887  42.184  10.369</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196 351  18.000  76.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197 350   4.000  76.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198 890  37.816  10.369</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199 324  -3.160  29.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200 321  -3.160  31.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201 331  92.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202 369  23.000  10.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203 368  20.000   5.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204 370  23.000  17.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205 356   4.000  65.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 206 357  22.000  53.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207 358  17.000  53.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208 359  17.000  48.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209 352  22.000  73.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210 353  22.000  68.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211 354   4.000  68.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212 355  22.000  65.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213 364  13.000  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214 365   4.000  17.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215 366   6.000   7.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216 367   8.000   5.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217 360   4.000  48.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 218 361   4.000  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219 362   4.000  18.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220 363  13.000  18.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 221 410  85.000  10.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 222 411  95.000  10.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 223 408  95.000   5.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 224 409  85.000   5.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 225 414  85.000  11.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 226 415  85.000  16.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 227 412  95.000  11.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 228 413  95.000  16.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 229 402  45.000  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 230 403  24.000  59.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 231 400  24.000  71.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 232 401  45.000  57.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 233 395  56.000   7.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 234 394  74.000   7.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 235 393  74.000  25.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 236 392  56.000  25.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 237 440  95.000  53.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 238 441  85.000  53.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 239 442  85.000  58.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 240 443  95.000  58.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 241 444  95.000  59.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 242 445  85.000  59.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 243 446  85.000  64.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 244 447  95.000  64.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 245 432  95.000  41.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 246 433  85.000  41.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 247 434  85.000  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 248 435  95.000  46.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 249 436  95.000  47.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 250 437  85.000  47.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 251 438  85.000  52.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 252 439  95.000  52.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 253 425  85.000  29.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 254 424  95.000  29.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 255 427  95.000  34.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 256 426  85.000  34.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 257 429  85.000  35.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 258 428  95.000  35.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 259 431  95.000  40.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 260 430  85.000  40.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 261 417  85.000  22.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 262 416  85.000  17.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 263 419  95.000  17.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 264 418  95.000  22.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 265 421  85.000  23.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 266 420  95.000  23.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 267 423  95.000  28.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 268 422  85.000  28.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 269 478  29.000  90.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 270 479  29.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 271 476  18.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 272 477  18.000  90.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 273 474  16.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 274 475  16.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 275 472   4.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 276 473   4.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 277 470  62.000  62.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 278 471  55.000  62.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 279 468  51.000  76.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 280 469  61.000  76.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 281 466  80.000  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 282 467  80.000  55.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 283 464  54.000  35.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 284 465  66.000  44.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 285 463  54.000  55.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 286 462  66.000  55.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 287 461  66.000  35.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 288 460  95.000  79.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 289 459  90.000  84.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 290 458  85.000  84.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 291 457  85.000  77.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 292 456  95.000  77.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 293 455  95.000  76.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 294 454  85.000  76.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 295 453  85.000  71.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 296 452  95.000  71.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 297 451  95.000  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 298 450  85.000  70.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 299 449  85.000  65.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 300 448  95.000  65.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 301 493  44.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 302 492  44.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 303 489  60.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 304 488  60.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 305 491  58.000  95.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 306 490  58.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 307 485  41.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 308 963  30.000   3.160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 309 484  41.000  79.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 310 487  78.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 311 486  82.000  92.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 312 481  29.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313 480  18.000  85.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 314 483  33.000  79.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 315 482  33.000  96.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $raw_parsed_data$edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      id start_node_id end_node_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   103             0           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   110             6           2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   108             3           0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   109             4           5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   106             1           2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   107             2           3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   104            18          99</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   119             9           6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   117            34         101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  116             8           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  115           101          75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  112             7           8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  127            51          18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  126            87          14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  123            14          88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  122             9          73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  121            11          10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  120            74           9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  136            23          22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  139            22          25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  138            25          24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  141            24          23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  140             3           6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  142            28           3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  129            14          27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  128            18         100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  131            17          19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  130            16          15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  133            15          17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  134            20          21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  153            41          39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  154            36          40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  157            21          41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  158            44          42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  159            42          43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  144            27          29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  145            32          31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  146            33          34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39  147            31          30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40  148            30          36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41  149            36          32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  150            37          38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  171            41          20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44  170            15          48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45  169            23          15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  175            50          49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  173            48          16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  172            16          50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  163            46          45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  162             7          24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51  161            33          36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52  160            25           8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53  167            32          19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54  165            40          30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55  164            43          46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56  186            60          59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57  187            59          61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58  184            56          57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59  185            52          51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60  190            63          64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61  191            64          65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62  189            70          67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63  178            54          53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64  177            53          52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65  182            62          55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66  183            55          56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67  180            20          49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68  205            73          72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69  207            89          90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70  206            83          84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71  201            86          85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72  200            75          78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73  203            80          82</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74  202            85          83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75  197            71          74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76  196            78          77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77  199            65          66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78  193            58          60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79  192            57          58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80  194            67          68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81  220            96          44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82  221            72          97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83  222            97          71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84  223            88          92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85  216             6          95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86  217            10          96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87  212            82          81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88  213            81          93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89  208            90          87</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90  209            91          89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91  210            94          79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92  211            93          94</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93  237            79          34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94  236            82          40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95  235            27          82</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96  234            76         101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97  232            95          54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98  230           100          28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99  229           100          95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100 228            92          99</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101 227            99          91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102 225            98          37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103 244            77         102</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104 245            45          98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105 240            40          79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106 241           102          76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107 304           302          62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108 306            21         305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109 309           305         308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110 313           299         308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111 312           302         305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112 317           315          69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113 316            68         315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114 319            69         318</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115 288            86         287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116 289           287         286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117 290           286          84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118 292            21         286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119 293           102         287</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120 294            39         286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121 300            61         299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122 303           299         302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123 342           340          97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124 339           337          63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125 338            66         337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126 348           337         340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127 347           343          63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128 345           343         340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129 344             5         343</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130 326           324           5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131 325           321         324</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132 322           308         321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133 320           318          70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134 335            40         331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135 332            79         331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136 333           331          80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137 328           318         321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138 329           315         324</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139 373           368         367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140 372           366         367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141 375           365         370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142 374           369         368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143 371           365         366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144 381           359         360</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145 380           361         364</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146 383           356         355</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147 377           363         362</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148 376           370         369</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149 378           363         364</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150 406           402         403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151 407           403         400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152 404           400         401</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153 399           393         392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154 398           394         393</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155 396           392         395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156 387           353         352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157 386           358         359</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158 385           357         358</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159 384           355         357</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160 391           354         353</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161 390           350         354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162 389           351         350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163 388           352         351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164 508           483         482</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165 509           492         493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166 510           493         490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167 511           490         491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168 504           481         478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169 505           482         485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170 507           484         483</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171 501           477         476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172 502           477         480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173 496           474         475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174 498           476         479</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175 499           479         478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176 495           473         474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177 494           472         473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178 550           431         430</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179 551           430         429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 180 548           433         432</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181 546           435         434</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182 547           434         433</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183 544           437         436</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184 558           423         422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185 559           422         421</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186 556           425         424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187 554           427         426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188 555           426         425</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189 552           429         428</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190 567           415         414</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191 566           413         415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192 564           416         419</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193 563           417         416</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194 562           418         417</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195 560           421         420</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196 575           466         467</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197 573           409         408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198 572           410         409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199 571           411         410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200 568           414         412</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201 518           469         470</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202 519           470         471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203 513           488         489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204 514           489         486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205 515           486         487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 206 524           456         457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207 525           457         458</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208 526           454         453</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209 527           453         452</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210 520           471         468</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211 521           458         459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212 523           460         456</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213 532           449         448</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214 535           446         445</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215 534           447         446</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216 529           455         454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217 531           450         449</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 218 530           450         451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219 540           441         440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220 543           438         437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 221 542           439         438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 222 536           445         444</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 223 539           442         441</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 224 538           443         442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 225 610           606         609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 226 611           609         356</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 227 614           612          20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 228 619            49         618</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 229 616           594         615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 230 617           615         612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 231 622           401         621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 232 623           621         402</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 233 620           618          48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 234 626           624          22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 235 631           475         630</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 236 629           627         624</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 237 628            48         627</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 238 632           630         472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 239 638           636         633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 240 637            39         636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 241 576           467         462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 242 577           462         463</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 243 578           463         464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 244 579           464         461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 245 580           461         465</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 246 583             4         582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 247 587           585           4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 248 589           366         582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 249 590           585         367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 250 592           582         591</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 251 595           591         594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 252 598           361         597</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 253 601           597         600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 254 602           600         362</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 255 605           591         600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 256 604           597         594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 257 607           360         606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 258 686           684         681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 259 685            30         684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 260 683           681          29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 261 680           678         460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 262 679           675         678</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 263 676           459         675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 264 674           672         669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 265 673           663         672</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 266 700           448         699</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 267 701           699         451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 268 698           696         693</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 269 697            29         696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 270 692           690         687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 271 691           452         690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 272 689           687         455</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 273 653           651          16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 274 652            19         651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 275 655           491         654</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 276 649           485         648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 277 650           648         484</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 278 644           642          41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 279 647           645         477</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 280 646           478         645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 281 641           639         481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 282 640           480         639</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 283 643            50         642</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 284 668           666         488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 285 671           669          33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 286 664           660         663</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 287 667           487         666</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 288 661           633         660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 289 658           654         657</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 290 659           657         492</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 291 745           738         744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 292 751           428         750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 293 748           744         747</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 294 739           735         738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 295 736           732         735</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 296 743           741         435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 297 742           432         741</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 298 763           759         762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 299 760           756         759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 300 766           762         765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 301 754           424         753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 302 755           753         427</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 303 752           750         431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 304 757           747         756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 305 712           702         711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 306 715           711         714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 307 718           714         717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 308 707           705         702</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 309 706           693         705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 310 709           444         708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 311 710           708         447</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 312 728           726         439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313 730           720         729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 314 733           729         732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 315 721           717         720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 316 724           440         723</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 317 725           723         443</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 318 727           436         726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 319 821           819           7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 320 823             0         822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 321 817           465         816</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 322 818           816         813</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 323 830           828          31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 324 824           822         819</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 325 827           825         469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 326 826           468         825</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 327 805           395         804</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 328 806           804         801</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 329 800           798          28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 330 803           801         394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 331 812           810         807</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 332 815           813         466</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 333 811             2         810</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 334 790           408         789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 335 788           786         413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 336 787           412         786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 337 784           780         783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 338 799           795         798</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 339 796           783         795</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 340 794           792         411</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 341 793           789         792</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 342 775           765         774</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 343 772           419         771</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 344 773           771         418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 345 770           768         423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 346 769           420         768</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 347 781           777         780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 348 778           774         777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 349 880           666         669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 350 885           807         884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 351 886           884         881</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 352 889           887          11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 353 888            13         887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 354 891            38         890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 355 892           890          13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 356 895           884         887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 357 894           881         890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 358 864           804         807</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 359 865           606         615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 360 866           612         609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 361 868           351          49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 362 869           621         624</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 363 870           627         401</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 364 871            50         639</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 365 872           642         480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 366 873           630         633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 367 874           472         636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 368 875           648          19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 369 876           484         651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 370 877           657         660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 371 878           654         663</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 372 879           488         672</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 373 851           744         431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 374 850           741         738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 375 849           735         435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 376 848           436         732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 377 855           762         423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 378 854           424         759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 379 853           756         753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 380 852           750         747</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 381 859           780         413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 382 858           419         777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 383 857           774         771</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 384 856           768         765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 385 863           810         801</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 386 862           798         789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 387 861           795         792</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 388 860           786         783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 389 835           825         828</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 390 832            17         831</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 391 833           831         828</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 392 838           684         675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 393 839           696         687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 394 836           468         831</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 395 837           678         681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 396 842           699         702</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 397 843           711         708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 398 840           690         693</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 399 841           705         451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 400 846           723         720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 401 847           729         726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 402 844           444         714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 403 845           717         443</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 404 931           813         822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 405 930           819         816</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 406 906           618         352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 407 973            92         714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 408 972            88         705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 409 962            73         881</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 410 961            73         884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 411 967            72         963</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 412 965           963         585</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 413 964           881         963</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $raw_parsed_data$faces</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      id     type orientation edge_hrefs neighbour</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   956 building           -        772       927</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   956 building           -        564      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   956 building           -        563      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   956 building           -        562      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   956 building           -        773      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   957 building           +        788       928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   957 building           +        566      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   957 building           +        567      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   957 building           +        568      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  957 building           +        787      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  958 building           +        794      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  958 building           +        571      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  958 building           +        572      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  958 building           +        573      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  958 building           +        790      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  958 building           +        793       929</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  959 building           +        806       899</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  959 building           +        803      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  959 building           +        398      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  959 building           +        399      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  959 building           +        396      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  959 building           +        805      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  952 building           +        550      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  952 building           +        551      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  952 building           +        552      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  952 building           +        751      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  952 building           +        752       924</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  953 building           +        575      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  953 building           +        576      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  953 building           +        577      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  953 building           +        578      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  953 building           +        579      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  953 building           +        580      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  953 building           +        817      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  953 building           +        818       932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  953 building           +        815      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  954 building           -        754       925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  954 building           -        556      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39  954 building           -        555      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40  954 building           -        554      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41  954 building           -        755      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  955 building           +        770       926</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  955 building           +        558      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44  955 building           +        559      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45  955 building           +        560      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  955 building           +        769      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  948 building           +        534      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  948 building           +        535      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  948 building           +        536      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  948 building           +        709       920</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51  948 building           +        710      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52  949 building           +        538      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53  949 building           +        539      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54  949 building           +        540      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55  949 building           +        724      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56  949 building           +        725       921</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57  950 building           +        542      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58  950 building           +        543      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59  950 building           +        544      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60  950 building           +        727       922</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61  950 building           +        728      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62  951 building           -        546      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63  951 building           -        743       923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64  951 building           -        742      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65  951 building           -        548      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66  951 building           -        547      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67  944 building           -        827      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68  944 building           -        826       916</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69  944 building           -        520      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70  944 building           -        519      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71  944 building           -        518      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72  945 building           -        676      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73  945 building           -        521      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74  945 building           -        525      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75  945 building           -        524      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76  945 building           -        523      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77  945 building           -        680      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78  945 building           -        679       917</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79  946 building           +        529      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80  946 building           +        526      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81  946 building           +        527      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82  946 building           +        691      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83  946 building           +        692       918</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84  946 building           +        689      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85  947 building           -        530      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86  947 building           +        531      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87  947 building           +        532      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88  947 building           +        700      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89  947 building           +        701       919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90  941 building           -        508      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91  941 building           -        507      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92  941 building           -        650       913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93  941 building           -        649      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94  941 building           -        505      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95  940 building           +        504      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96  940 building           +        646      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97  940 building           +        647       939</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98  940 building           +        502      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99  940 building           +        640       912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100 940 building           +        641      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101 943 building           +        513      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102 943 building           +        514      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103 943 building           +        515      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104 943 building           +        667      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105 943 building           +        668       915</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106 942 building           +        659      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107 942 building           +        509      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108 942 building           +        510      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109 942 building           +        511      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110 942 building           +        655      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111 942 building           +        658       914</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112 937 building           -        406      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113 937 building           -        623      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114 937 building           -        622       933</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115 937 building           -        404      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116 937 building           -        407      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117 936 building           -        386      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118 936 building           -        385      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119 936 building           -        384      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120 936 building           -        383      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121 936 building           -        611      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122 936 building           -        610       904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123 936 building           -        607      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124 936 building           -        381      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125 939 building           -        498      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126 939 building           -        501      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127 939 building           -        647       940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128 939 building           -        646      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129 939 building           -        499      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130 938 building           +        495      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131 938 building           +        496      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132 938 building           +        631      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133 938 building           +        632       911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134 938 building           +        494      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135 935 building           -        377      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136 935 building           +        378      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137 935 building           -        380      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138 935 building           +        598      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139 935 building           +        601       903</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140 935 building           +        602      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141 934 building           -        373      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142 934 building           -        374      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143 934 building           -        376      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144 934 building           -        375      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145 934 building           +        371      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146 934 building           +        372       902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147 254 building           +        207      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148 254 building           +        208      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149 254 building           +        126      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150 254 building           +        123       974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151 254 building           +        223      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152 254 building           +        228      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153 254 building           +        227      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154 254 building           +        209      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155 255 building           +        185      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156 255 building           +        127      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157 255 building           +        128       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158 255 building           +        229       274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159 255 building           +        232      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160 255 building           +        178      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161 255 building           +        177      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162 253 building           +        234       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163 253 building           +        115      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164 253 building           +        200      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165 253 building           +        196      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166 253 building           +        244      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167 253 building           +        241       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168 250 building           +        332       336</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169 250 building           +        333      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170 250 building           +        203      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171 250 building           +        212      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172 250 building           +        213      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173 250 building           +        211      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174 250 building           +        210      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175 251 building           +        197      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176 251 building           +        120      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177 251 building           +        122      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178 251 building           +        205       968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179 251 building           +        221      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 180 251 building           +        222      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181 905 building           +        388       910</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182 905 building           +        389      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183 905 building           +        390      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184 905 building           +        391      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185 905 building           +        387      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186 248 building           +        190      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187 248 building           +        191      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188 248 building           +        199      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189 248 building           +        338      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190 248 building           +        339       349</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191 249 building           +        186      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192 249 building           +        187      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193 249 building           +        300      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194 249 building           +        303       314</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195 249 building           +        304      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196 249 building           +        182      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197 249 building           +        183      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198 249 building           +        184      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199 249 building           +        192      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200 249 building           +        193      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201 247 building           +        194      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202 247 building           +        316      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203 247 building           +        317       330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204 247 building           +        319       330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205 247 building           +        320      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 206 247 building           +        189      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207 298 building           +        290      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208 298 building           -        206      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209 298 building           -        202      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210 298 building           -        201      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211 298 building           +        288      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212 298 building           +        289       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213 960 building           -        888       896</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214 960 building           -        892       896</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215 960 building           -        891      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216 960 building           -        150      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217 960 building           -        225      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 218 960 building           -        245      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219 960 building           -        163      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220 960 building           -        164      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 221 960 building           -        159      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 222 960 building           -        158      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 223 960 building           -        220      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 224 960 building           -        217      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 225 960 building           -        121      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 226 960 building           -        889      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 227 275     road           +        136       268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 228 275     road           +        139      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 229 275     road           +        138       258</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 230 275     road           +        141      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 231 274     road           +        216      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 232 274     road           -        229       255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 233 274     road           +        230       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 234 274     road           +        142      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 235 274     road           +        140       279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 236 273     road           +        134       281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 237 273     road           +        306      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 238 273     road           +        309       314</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 239 273     road           +        322      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 240 273     road           +        325       330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 241 273     road           +        326      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 242 273     road           -        109       969</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 243 273     road           +        583       902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 244 273     road           +        592      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 245 273     road           +        595       903</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 246 273     road           +        616      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 247 273     road           +        617       904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 248 273     road           +        614      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 249 279     road           -        140       274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 250 279     road           -        107       266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 251 279     road           -        110       971</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 252 278     road           -        173       271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 253 278     road           -        170       268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 254 278     road           -        130       263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 255 281     road           -        171       256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 256 281     road           -        157       296</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 257 281     road           -        134       273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 258 280     road           -        148       257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 259 280     road           -        165       262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 260 280     road           -        154       259</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 261 258     road           -        138       275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 262 258     road           +        160      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 263 258     road           -        112       269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 264 258     road           +        162      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 265 259     road           +        154       280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 266 259     road           +        240       336</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 267 259     road           +        237      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 268 259     road           -        146       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 269 259     road           +        161      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 270 256     road           +        171       281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 271 256     road           +        180      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 272 256     road           -        175       271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 273 256     road           +        643       912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 274 256     road           +        644      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 275 257     road           +        145       270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 276 257     road           +        147      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 277 257     road           +        148       280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 278 257     road           +        149      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 279 262     road           -        144       974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 280 262     road           +        235      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 281 262     road           +        236      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 282 262     road           +        165       280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 283 262     road           +        685      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 284 262     road           +        686       917</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 285 262     road           +        683      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 286 263     road           +        130       278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 287 263     road           +        133      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 288 263     road           +        131       270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 289 263     road           +        652       913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 290 263     road           +        653      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 291 266     road           +        103       269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 292 266     road           +        106      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 293 266     road           +        107       279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 294 266     road           +        108      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 295 933     road           +        869      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 296 933     road           -        629       268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 297 933     road           +        870      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 298 933     road           +        622       937</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 299 932     road           +        818       953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 300 932     road           +        931      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 301 932     road           +        824       269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 302 932     road           +        930      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 303 270     road           -        131       263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 304 270     road           +        832      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 305 270     road           +        833       916</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 306 270     road           +        830      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 307 270     road           -        145       257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 308 270     road           +        167      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 309 929     road           +        861      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 310 929     road           -        793       958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 311 929     road           -        862      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 312 929     road           -        799       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313 271     road           +        175       256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 314 271     road           +        619       910</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 315 271     road           +        620      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 316 271     road           +        173       278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 317 271     road           +        172      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 318 928     road           -        788       957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 319 928     road           +        860      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 320 928     road           -        784       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 321 928     road           +        859      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 322 268     road           +        170       278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 323 268     road           +        628      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 324 268     road           +        629       933</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 325 268     road           +        626      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 326 268     road           -        136       275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 327 268     road           +        169      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 328 269     road           +        112       258</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 329 269     road           +        116      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 330 269     road           -        103       266</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 331 269     road           +        823      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 332 269     road           +        824       932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 333 269     road           +        821      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 334 926     road           +        855      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 335 926     road           -        770       955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 336 926     road           +        856      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 337 926     road           -        766       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 338 927     road           +        857      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 339 927     road           -        772       956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 340 927     road           +        858      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 341 927     road           -        778       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 342 924     road           +        851      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 343 924     road           -        752       952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 344 924     road           +        852      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 345 924     road           -        748       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 346 925     road           +        853      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 347 925     road           -        754       954</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 348 925     road           +        854      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 349 925     road           -        760       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 350 922     road           +        847      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 351 922     road           -        727       950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 352 922     road           +        848      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 353 922     road           -        733       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 354 923     road           +        849      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 355 923     road           -        743       951</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 356 923     road           +        850      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 357 923     road           -        739       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 358 920     road           -        709       948</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 359 920     road           +        844      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 360 920     road           -        715       975</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 361 920     road           +        843      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 362 921     road           +        845      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 363 921     road           -        725       949</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 364 921     road           +        846      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 365 921     road           -        721       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 366 918     road           +        839      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 367 918     road           -        692       946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 368 918     road           +        840      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 369 918     road           -        698       974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 370 919     road           +        841      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 371 919     road           -        701       947</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 372 919     road           +        842      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 373 919     road           -        707       975</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 374 916     road           +        826       944</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 375 916     road           +        835      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 376 916     road           -        833       270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 377 916     road           -        836      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 378 314     road           -        312      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 379 314     road           -        303       249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 380 314     road           +        313      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 381 314     road           -        309       273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 382 917     road           +        837      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 383 917     road           -        686       262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 384 917     road           +        838      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 385 917     road           +        679       945</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 386 914     road           -        658       942</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 387 914     road           +        878      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 388 914     road           -        664       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 389 914     road           -        877      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 390 915     road           -        668       943</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 391 915     road           +        880      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 392 915     road           -        674       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 393 915     road           -        879      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 394 912     road           -        640       940</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 395 912     road           -        872      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 396 912     road           -        643       256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 397 912     road           +        871      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 398 913     road           -        875      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 399 913     road           +        650       941</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 400 913     road           +        876      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 401 913     road           -        652       263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 402 911     road           +        632       938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 403 911     road           +        874      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 404 911     road           +        638       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 405 911     road           -        873      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 406 910     road           +        388       905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 407 910     road           +        868      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 408 910     road           +        619       271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 409 910     road           +        906      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 410 904     road           -        610       936</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 411 904     road           +        865      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 412 904     road           +        617       273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 413 904     road           +        866      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 414 903     road           -        595       273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 415 903     road           +        605      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 416 903     road           -        601       935</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 417 903     road           +        604      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 418 296     road           +        153      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 419 296     road           +        294       297</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 420 296     road           -        292      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 421 296     road           +        157       281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 422 297     road           -        294       296</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 423 297     road           +        637      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 424 297     road           +        638       911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 425 297     road           +        661      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 426 297     road           +        664       914</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 427 297     road           +        673      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 428 297     road           +        674       915</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 429 297     road           +        671      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 430 297     road           +        146       259</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 431 297     road           +        117      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 432 297     road           -        234       253</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 433 297     road           -        241       253</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 434 297     road           +        293      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 435 297     road           +        289       298</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 436 902     road           -        372       934</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 437 902     road           +        589      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 438 902     road           -        583       273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 439 902     road           -        587       969</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 440 902     road           +        590      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 441 899     road           -        806       959</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 442 899     road           +        864      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 443 899     road           -        812       971</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 444 899     road           +        863      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 445 896     road           -        894      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 446 896     road           -        886       970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 447 896     road           +        895      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 448 896     road           -        888       960</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 449 896     road           -        892       960</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 450 336     road           -        332       250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 451 336     road           -        240       259</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 452 336     road           +        335      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 453 349     road           +        348      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 454 349     road           -        345       969</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 455 349     road           +        347      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 456 349     road           -        339       248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 457 330     road           -        328      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 458 330     road           -        319       247</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 459 330     road           -        317       247</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 460 330     road           +        329      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 461 330     road           -        325       273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 462 976     road           -        973       975</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 463 976     road           +        228      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 464 976     road           -        104      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 465 976     road           +        128       255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 466 976     road           +        230       274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 467 976     road           -        800      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 468 976     road           -        799       929</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 469 976     road           -        796      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 470 976     road           -        784       928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 471 976     road           -        781      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 472 976     road           -        778       927</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 473 976     road           -        775      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 474 976     road           -        766       926</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 475 976     road           -        763      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 476 976     road           -        760       925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 477 976     road           -        757      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 478 976     road           -        748       924</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 479 976     road           -        745      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 480 976     road           -        739       923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 481 976     road           -        736      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 482 976     road           -        733       922</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 483 976     road           -        730      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 484 976     road           -        721       921</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 485 976     road           -        718      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 486 971     road           +        885      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 487 971     road           -        961       970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 488 971     road           -        122      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 489 971     road           +        119      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 490 971     road           +        110       279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 491 971     road           +        811      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 492 971     road           +        812       899</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 493 970     road           +        961       971</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 494 970     road           +        886       896</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 495 970     road           -        962       968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 496 969     road           +        965      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 497 969     road           +        587       902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 498 969     road           +        109       273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 499 969     road           +        344      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 500 969     road           +        345       349</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 501 969     road           +        342      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 502 969     road           -        221      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 503 969     road           +        967       968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 504 968     road           -        205       251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 505 968     road           +        962       970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 506 968     road           +        964      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 507 968     road           -        967       969</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 508 975     road           +        972       974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 509 975     road           +        707       919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 510 975     road           +        712      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 511 975     road           +        715       920</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 512 975     road           -        973       976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 513 975     road           -        223      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 514 974     road           +        972       975</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 515 974     road           -        706      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 516 974     road           -        698       918</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 517 974     road           -        697      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 518 974     road           -        144       262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 519 974     road           -        129      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 520 974     road           +        123       254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rrs_map" "list"   </span>
