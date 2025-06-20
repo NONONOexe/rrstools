@@ -15,6 +15,8 @@ the minimum x and y values are 0. (Default: \code{TRUE})}
 }
 \value{
 A list of \code{sf} objects: nodes, edges, buildings, and roads.
+Also includes a sub-list \code{raw_parsed_data} containing the intermediate
+data frames from XML parsing.
 }
 \description{
 This function reads and processes map data for RoboCupRescue Simulation
