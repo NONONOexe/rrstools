@@ -114,7 +114,6 @@ create_face_sf <- function(faces, edge_sf) {
   sf::st_set_agr(do.call(rbind, face_list), "constant")
 }
 
-# Read a GML map and extract nodes, edges, buildings, and roads
 #' @rdname read_rrs_map
 #' @export
 read_rrs_map <- function(gml, scale_data = FALSE) {
