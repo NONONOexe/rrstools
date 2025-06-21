@@ -95,7 +95,6 @@ parse_faces <- function(xml, edge_sf, type = c("building", "road")) {
   ))
 }
 
-# Read a GML map and extract nodes, edges, buildings, and roads
 #' @rdname read_rrs_map
 #' @export
 read_rrs_map <- function(gml, scale_data = FALSE) {
