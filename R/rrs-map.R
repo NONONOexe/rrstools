@@ -22,13 +22,13 @@ plot.rrs_map <- function(x,
                          ...) {
   graphics::par(...)
   plot(
-    x$buildings$geometry,
+    x$building_sf$geometry,
     col    = building_colour,
     border = building_border,
     bg     = background_colour
   )
   plot(
-    x$roads$geometry,
+    x$road_sf$geometry,
     col    = road_colour,
     border = road_border,
     add    = TRUE
