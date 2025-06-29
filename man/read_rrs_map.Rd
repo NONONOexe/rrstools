@@ -15,16 +15,13 @@ the minimum x and y values are 0. (Default: \code{TRUE})}
 }
 \value{
 A list of \code{sf} objects: nodes, edges, buildings, and roads.
-Also includes a sub-list \code{raw_parsed_data} containing the intermediate
-data frames from XML parsing.
 }
 \description{
 This function reads and processes map data for RoboCupRescue Simulation
-from a GML file. It extracts nodes, edges, buildings and roads, and
-organizes them into a list.
+from a GML file. It extracts nodes, edges, buildings and roads.
 }
 \examples{
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
-map_data <- read_rrs_map(gml)
-map_data
+map <- read_rrs_map(gml)
+map
 }

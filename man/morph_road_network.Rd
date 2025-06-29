@@ -4,10 +4,10 @@
 \alias{morph_road_network}
 \title{Morph raw map data into a road network}
 \usage{
-morph_road_network(map_data)
+morph_road_network(map)
 }
 \arguments{
-\item{map_data}{\code{rrs_map} data, the GML map data loaded by
+\item{map}{\code{rrs_map} data, the GML map data loaded by
 the \code{read_rrs_map()}.}
 }
 \value{
@@ -28,7 +28,7 @@ between areas. Edges connect nodes between an agent can travel.
 }
 \examples{
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
-map_data <- read_rrs_map(gml)
-network <- morph_road_network(map_data)
-network
+map <- read_rrs_map(gml)
+net <- morph_road_network(map)
+net
 }

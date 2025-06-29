@@ -57,13 +57,13 @@ library(rrstools)
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 
 # Read the map data from the GML file
-map_data <- read_rrs_map(gml)
+map <- read_rrs_map(gml)
 
 # Print the map data
-map_data
+map
 
 # Plot the map data
-plot(map_data)
+plot(map)
 ```
 
 ## Code of conduct
