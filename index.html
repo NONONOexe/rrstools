@@ -90,95 +90,16 @@
 <span><span class="va">gml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"map-test.gml"</span>, package <span class="op">=</span> <span class="st">"rrstools"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Read the map data from the GML file</span></span>
-<span><span class="va">map_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rrs_map.html">read_rrs_map</a></span><span class="op">(</span><span class="va">gml</span><span class="op">)</span></span>
+<span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rrs_map.html">read_rrs_map</a></span><span class="op">(</span><span class="va">gml</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print the map data</span></span>
-<span><span class="va">map_data</span></span>
-<span><span class="co">#&gt; $nodes</span></span>
-<span><span class="co">#&gt; Simple feature collection with 315 features and 1 field</span></span>
-<span><span class="co">#&gt; Attribute-geometry relationship: constant (1)</span></span>
-<span><span class="co">#&gt; Geometry type: POINT</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -30 ymin: -20 xmax: 135 ymax: 121</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;    id            geometry</span></span>
-<span><span class="co">#&gt; 1   0 POINT (83.16 43.16)</span></span>
-<span><span class="co">#&gt; 2   1 POINT (76.84 36.84)</span></span>
-<span><span class="co">#&gt; 3   2  POINT (76.84 3.16)</span></span>
-<span><span class="co">#&gt; 4   3  POINT (83.16 3.16)</span></span>
-<span><span class="co">#&gt; 5   4   POINT (3.16 3.16)</span></span>
-<span><span class="co">#&gt; 6   5 POINT (-3.16 -3.16)</span></span>
-<span><span class="co">#&gt; 7   6    POINT (80 -3.16)</span></span>
-<span><span class="co">#&gt; 8   7       POINT (67 43)</span></span>
-<span><span class="co">#&gt; 9   8 POINT (73.16 36.84)</span></span>
-<span><span class="co">#&gt; 10  9    POINT (40 -3.16)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $edges</span></span>
-<span><span class="co">#&gt; Simple feature collection with 413 features and 1 field</span></span>
-<span><span class="co">#&gt; Attribute-geometry relationship: constant (1)</span></span>
-<span><span class="co">#&gt; Geometry type: LINESTRING</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -30 ymin: -20 xmax: 135 ymax: 121</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;     id                       geometry</span></span>
-<span><span class="co">#&gt; 1  103 LINESTRING (76.84 36.84, 83...</span></span>
-<span><span class="co">#&gt; 2  110 LINESTRING (76.84 3.16, 80 ...</span></span>
-<span><span class="co">#&gt; 3  108 LINESTRING (83.16 43.16, 83...</span></span>
-<span><span class="co">#&gt; 4  109 LINESTRING (-3.16 -3.16, 3....</span></span>
-<span><span class="co">#&gt; 5  106 LINESTRING (76.84 3.16, 76....</span></span>
-<span><span class="co">#&gt; 6  107 LINESTRING (83.16 3.16, 76....</span></span>
-<span><span class="co">#&gt; 7  104 LINESTRING (103.16 60, 103....</span></span>
-<span><span class="co">#&gt; 8  119 LINESTRING (80 -3.16, 40 -3...</span></span>
-<span><span class="co">#&gt; 9  117 LINESTRING (42.16 103.16, 8...</span></span>
-<span><span class="co">#&gt; 10 116 LINESTRING (76.84 36.84, 73...</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $buildings</span></span>
-<span><span class="co">#&gt; Simple feature collection with 37 features and 1 field</span></span>
-<span><span class="co">#&gt; Attribute-geometry relationship: constant (1)</span></span>
-<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -30 ymin: -20 xmax: 135 ymax: 121</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;     id                       geometry</span></span>
-<span><span class="co">#&gt; 1  956 POLYGON ((95 19, 95 17, 85 ...</span></span>
-<span><span class="co">#&gt; 2  957 POLYGON ((95 16, 95 14, 95 ...</span></span>
-<span><span class="co">#&gt; 3  958 POLYGON ((95 10, 95 9, 95 7...</span></span>
-<span><span class="co">#&gt; 4  959 POLYGON ((68 7, 63 7, 56 7,...</span></span>
-<span><span class="co">#&gt; 5  952 POLYGON ((85 40, 95 40, 95 ...</span></span>
-<span><span class="co">#&gt; 6  953 POLYGON ((80 55, 80 44, 77 ...</span></span>
-<span><span class="co">#&gt; 7  954 POLYGON ((95 31, 95 29, 85 ...</span></span>
-<span><span class="co">#&gt; 8  955 POLYGON ((95 28, 95 26, 95 ...</span></span>
-<span><span class="co">#&gt; 9  948 POLYGON ((85 64, 95 64, 95 ...</span></span>
-<span><span class="co">#&gt; 10 949 POLYGON ((85 58, 95 58, 95 ...</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $roads</span></span>
-<span><span class="co">#&gt; Simple feature collection with 58 features and 1 field</span></span>
-<span><span class="co">#&gt; Attribute-geometry relationship: constant (1)</span></span>
-<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -11.2 ymin: -10 xmax: 103.16 ymax: 103.16</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;     id                       geometry</span></span>
-<span><span class="co">#&gt; 1  275 POLYGON ((47 27, 53 34, 67 ...</span></span>
-<span><span class="co">#&gt; 2  274 POLYGON ((99.56 -3.16, 80 -...</span></span>
-<span><span class="co">#&gt; 3  273 POLYGON ((-3.16 80, 3 77, 3...</span></span>
-<span><span class="co">#&gt; 4  279 POLYGON ((83.16 3.16, 80 -3...</span></span>
-<span><span class="co">#&gt; 5  278 POLYGON ((47 58, 45 68, 53 ...</span></span>
-<span><span class="co">#&gt; 6  281 POLYGON ((3 84, 3 77, -3.16...</span></span>
-<span><span class="co">#&gt; 7  280 POLYGON ((89.15 86.38, 84.1...</span></span>
-<span><span class="co">#&gt; 8  258 POLYGON ((73.16 26.84, 67 3...</span></span>
-<span><span class="co">#&gt; 9  259 POLYGON ((92.24 92.24, 84.1...</span></span>
-<span><span class="co">#&gt; 10 256 POLYGON ((3 77, 3 84, 18 84...</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; attr(,"class")</span></span>
-<span><span class="co">#&gt; [1] "rrs_map" "list"</span></span>
+<span><span class="va">map</span></span>
+<span><span class="co">#&gt; RoboCupRescue Simulation map object</span></span>
+<span><span class="co">#&gt; Number of elements: nodes: 315 edges: 413 faces: 95</span></span>
+<span><span class="co">#&gt; Bounding box: xmin: -30 ymin: -20 xmax: 135 ymax: 121</span></span>
 <span></span>
 <span><span class="co"># Plot the map data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">map_data</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
 </div>
 <div class="section level2">

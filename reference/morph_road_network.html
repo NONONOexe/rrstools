@@ -39,16 +39,24 @@ into a road network.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">morph_road_network</span><span class="op">(</span><span class="va">map_data</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">morph_road_network</span><span class="op">(</span><span class="va">map</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"roads_only"</span>, <span class="st">"roads_no_entrances"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-map-data">map_data<a class="anchor" aria-label="anchor" href="#arg-map-data"></a></dt>
+<dl><dt id="arg-map">map<a class="anchor" aria-label="anchor" href="#arg-map"></a></dt>
 <dd><p><code>rrs_map</code> data, the GML map data loaded by
 the <code><a href="read_rrs_map.html">read_rrs_map()</a></code>.</p></dd>
+
+
+<dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
+<dd><p>A character string specifiying the mode of the road network:</p><ul><li><p><code>"all"</code>: All areas are included in the network (default).</p></li>
+<li><p><code>"roads_only"</code>: Only road areas are included.</p></li>
+<li><p><code>"roads_no_entrances"</code>: Only road areas are included,
+excluding entrances.</p></li>
+</ul></dd>
 
 </dl></div>
     <div class="section level2">
@@ -66,27 +74,27 @@ between areas. Edges connect nodes between an agent can travel.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">gml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"map-test.gml"</span>, package <span class="op">=</span> <span class="st">"rrstools"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">map_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_rrs_map.html">read_rrs_map</a></span><span class="op">(</span><span class="va">gml</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">network</span> <span class="op">&lt;-</span> <span class="fu">morph_road_network</span><span class="op">(</span><span class="va">map_data</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">network</span></span></span>
+<span class="r-in"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_rrs_map.html">read_rrs_map</a></span><span class="op">(</span><span class="va">gml</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu">morph_road_network</span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">net</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $nodes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 197 features and 3 fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 197 features and 4 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POINT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -21 ymin: -15 xmax: 120.7273 ymax: 110.9911</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     id     type degree                  geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  247 building      2            POINT (-20 30)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  248 building      1            POINT (15 -15)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  249 building      1            POINT (-21 55)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  250 building      1         POINT (95.5 98.5)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  251 building      1          POINT (35 -10.5)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  253 building      2 POINT (39.99393 110.9911)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  254 building      1 POINT (120.7273 62.72727)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  255 building      2 POINT (101.6462 -7.97594)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  256     road      3 POINT (11.55317 80.52697)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 257     road      2 POINT (73.35771 84.38836)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     id origin_id     type degree                  geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  977       956 building      1           POINT (90 19.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  978       957 building      1           POINT (90 13.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  979       958 building      1            POINT (90 7.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  980       959 building      1             POINT (65 16)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  981       952 building      1           POINT (90 37.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  982       953 building      1 POINT (65.08122 46.75888)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  983       954 building      1           POINT (90 31.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  984       955 building      1           POINT (90 25.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  985       948 building      1           POINT (90 61.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 986       949 building      1           POINT (90 55.5)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 204 features and 4 fields</span>
@@ -95,17 +103,17 @@ between areas. Edges connect nodes between an agent can travel.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -21 ymin: -15 xmax: 120.7273 ymax: 110.9911</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     id     type from  to                       geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  247 building  247 317 LINESTRING (-20 30, -10.6 2...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  247 building  247 319 LINESTRING (-20 30, -10.6 3...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  248 building  248 339  LINESTRING (15 -15, 11.5 -10)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  249 building  249 303    LINESTRING (-21 55, -10 45)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  250 building  250 332  LINESTRING (95.5 98.5, 91 95)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  251 building  251 205   LINESTRING (35 -10.5, 35 -1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  253 building  253 234 LINESTRING (39.99393 110.99...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  253 building  253 241 LINESTRING (39.99393 110.99...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  254 building  254 123 LINESTRING (120.7273 62.727...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 255 building  255 128 LINESTRING (101.6462 -7.975...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      id     type from  to                       geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1174 building  956 772    LINESTRING (90 19.5, 95 18)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  1175 building  957 788    LINESTRING (90 13.5, 95 15)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  1176 building  958 793      LINESTRING (90 7.5, 95 8)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  1177 building  959 806     LINESTRING (65 16, 65.5 7)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  1178 building  952 752    LINESTRING (90 37.5, 95 39)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  1179 building  953 818 LINESTRING (65.08122 46.758...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  1180 building  954 754    LINESTRING (90 31.5, 95 30)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  1181 building  955 770    LINESTRING (90 25.5, 95 27)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  1182 building  948 709    LINESTRING (90 61.5, 95 60)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 1183 building  949 725    LINESTRING (90 55.5, 95 57)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "rrs_road_network" "list"            </span>
