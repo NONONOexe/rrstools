@@ -25,12 +25,14 @@ create_network_nodes <- function(map) {
   faces <- get_faces(map)
 
   # Create face nodes
+  last_id <- max(as.integer(c(map$nodes$id, map$edges$id, map$faces$id)))
   face_nodes <- sf::st_sf(
-    id       = faces$id,
-    type     = faces$type,
-    degree   = sapply(faces$edges,
+    id        = as.character(last_id + seq(nrow(faces))),
+    origin_id = faces$id,
+    type      = faces$type,
+    degree    = sapply(faces$edges,
                       function(face_edges) sum(!is.na(face_edges$neighbour))),
-    geometry = sf::st_centroid(faces$geometry)
+    geometry  = sf::st_centroid(faces$geometry)
   )
 
   # Creates border nodes
@@ -38,11 +40,13 @@ create_network_nodes <- function(map) {
   has_neighbour <- !is.na(all_face_edges$neighbour)
   border_ids <- unique(all_face_edges$edge_hrefs[has_neighbour])
   borders <- get_edges(map, ids = border_ids)
+  last_id <- max(as.integer(face_nodes$id))
   border_nodes <- sf::st_sf(
-    id       = borders$id,
-    type     = "border",
-    degree   = 2,  # Each border node connects to two faces
-    geometry = sf::st_centroid(borders$geometry)
+    id        = as.character(last_id + seq(nrow(borders))),
+    origin_id = borders$id,
+    type      = "border",
+    degree    = 2,  # Each border node connects to two faces
+    geometry  = sf::st_centroid(borders$geometry)
   )
 
   rbind(face_nodes, border_nodes)
@@ -54,8 +58,9 @@ create_network_edges <- function(map, network_nodes) {
   faces <- get_faces(map)
   neighbour_num <- faces$edges |>
     sapply(function(edges) sum(!is.na(edges$neighbour)))
+  last_id <- max(as.integer(network_nodes$id))
   network_edges <- data.frame(
-    id   = paste0(faces$id, "-", sequence(neighbour_num)),
+    id   = as.character(last_id + seq(sum(neighbour_num))),
     type = rep(faces$type, times = neighbour_num),
     from = rep(faces$id, times = neighbour_num),
     to   = faces$edges |>
@@ -65,9 +70,9 @@ create_network_edges <- function(map, network_nodes) {
   )
 
   # Get the start and end point geometries
-  node_ids   <- network_nodes$id
-  start_node <- network_nodes[match(network_edges$from, node_ids), ]$geometry
-  end_node   <- network_nodes[match(network_edges$to, node_ids), ]$geometry
+  origin_ids <- network_nodes$origin_id
+  start_node <- network_nodes[match(network_edges$from, origin_ids), ]$geometry
+  end_node   <- network_nodes[match(network_edges$to, origin_ids), ]$geometry
 
   # Create a list of linestring geometries connecting the start and end points
   geometries <- mapply(
