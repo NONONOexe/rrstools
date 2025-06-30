@@ -4,11 +4,19 @@
 \alias{morph_road_network}
 \title{Morph raw map data into a road network}
 \usage{
-morph_road_network(map_data)
+morph_road_network(map, mode = c("all", "roads_only", "roads_no_entrances"))
 }
 \arguments{
-\item{map_data}{\code{rrs_map} data, the GML map data loaded by
+\item{map}{\code{rrs_map} data, the GML map data loaded by
 the \code{read_rrs_map()}.}
+
+\item{mode}{A character string specifiying the mode of the road network:
+\itemize{
+\item \code{"all"}: All areas are included in the network (default).
+\item \code{"roads_only"}: Only road areas are included.
+\item \code{"roads_no_entrances"}: Only road areas are included,
+excluding entrances.
+}}
 }
 \value{
 A list containing the network components:
@@ -28,7 +36,7 @@ between areas. Edges connect nodes between an agent can travel.
 }
 \examples{
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
-map_data <- read_rrs_map(gml)
-network <- morph_road_network(map_data)
-network
+map <- read_rrs_map(gml)
+net <- morph_road_network(map)
+net
 }

@@ -30,10 +30,12 @@
 \item{...}{Additional arguments passed to \code{par}.}
 }
 \description{
-This function plots a rrs map
+\code{plot.rrs_map} visualizes a \code{rrs_map} object, displaying the geographical
+features such as buildings and roads. It leverages the \code{sf} package's
+plotting capbilities to render the map components.
 }
 \examples{
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
-map_data <- read_rrs_map(gml)
-plot(map_data)
+map <- read_rrs_map(gml)
+plot(map)
 }
