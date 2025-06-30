@@ -100,6 +100,6 @@ is_entrance <- function(road_edges, map) {
 get_entrances <- function(map, ids = character()) {
   roads <- get_roads(map, ids)
   is_entrance_vec <- sapply(roads$edges, is_entrance, map)
-  entrance_ids <- names(roads)[is_entrance_vec]
+  entrance_ids <- names(is_entrance_vec)[is_entrance_vec]
   roads[roads$id %in% entrance_ids, ]
 }

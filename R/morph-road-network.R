@@ -10,6 +10,11 @@
 #' @name morph_road_network
 #' @param map `rrs_map` data, the GML map data loaded by
 #'   the `read_rrs_map()`.
+#' @param mode A character string specifiying the mode of the road network:
+#'   - `"all"`: All areas are included in the network (default).
+#'   - `"roads_only"`: Only road areas are included.
+#'   - `"roads_no_entrances"`: Only road areas are included,
+#'     excluding entrances.
 #' @return A list containing the network components:
 #'   - `nodes`: A sf object of nodes with point geometries.
 #'   - `edges`: A sf object of edges with linestring geometries.
@@ -21,8 +26,15 @@
 NULL
 
 # Create network nodes from map data
-create_network_nodes <- function(map) {
-  faces <- get_faces(map)
+create_network_nodes <- function(map, mode) {
+  # Select the relevant faces based on the mode
+  if (mode == "all") faces <- get_faces(map)
+  if (mode == "roads_only") faces <- get_roads(map)
+  if (mode == "roads_no_entrances") {
+    faces <- get_roads(map)
+    entrance_ids <- get_entrances(map)$id
+    faces <- faces[!faces$id %in% entrance_ids, ]
+  }
 
   # Create face nodes
   last_id <- max(as.integer(c(map$nodes$id, map$edges$id, map$faces$id)))
@@ -37,7 +49,9 @@ create_network_nodes <- function(map) {
 
   # Creates border nodes
   all_face_edges <- do.call(rbind, faces$edges)
-  has_neighbour <- !is.na(all_face_edges$neighbour)
+  has_neighbour <-
+    all_face_edges$neighbour %in% face_nodes$origin_id &
+    !is.na(all_face_edges$neighbour)
   border_ids <- unique(all_face_edges$edge_hrefs[has_neighbour])
   borders <- get_edges(map, ids = border_ids)
   last_id <- max(as.integer(face_nodes$id))
@@ -73,20 +87,25 @@ create_network_edges <- function(map, network_nodes) {
   origin_ids <- network_nodes$origin_id
   start_node <- network_nodes[match(network_edges$from, origin_ids), ]$geometry
   end_node   <- network_nodes[match(network_edges$to, origin_ids), ]$geometry
+  is_empty   <- sf::st_is_empty(start_node) | sf::st_is_empty(end_node)
 
   # Create a list of linestring geometries connecting the start and end points
   geometries <- mapply(
     function(p1, p2) sf::st_linestring(c(p1, p2)),
-    start_node, end_node, SIMPLIFY = FALSE
+    start_node[!is_empty],
+    end_node[!is_empty],
+    SIMPLIFY = FALSE
   )
 
-  sf::st_sf(network_edges, geometry = geometries)
+  sf::st_sf(network_edges[!is_empty, ], geometry = geometries)
 }
 
 #' @rdname morph_road_network
 #' @export
-morph_road_network <- function(map) {
-  network_nodes <- create_network_nodes(map)
+morph_road_network <- function(map,
+                               mode = c("all", "roads_only", "roads_no_entrances")) {
+  mode <- match.arg(mode)
+  network_nodes <- create_network_nodes(map, mode)
   network_edges <- create_network_edges(map, network_nodes)
   road_network  <- list(
     nodes = network_nodes,

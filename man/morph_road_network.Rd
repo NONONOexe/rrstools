@@ -4,11 +4,19 @@
 \alias{morph_road_network}
 \title{Morph raw map data into a road network}
 \usage{
-morph_road_network(map)
+morph_road_network(map, mode = c("all", "roads_only", "roads_no_entrances"))
 }
 \arguments{
 \item{map}{\code{rrs_map} data, the GML map data loaded by
 the \code{read_rrs_map()}.}
+
+\item{mode}{A character string specifiying the mode of the road network:
+\itemize{
+\item \code{"all"}: All areas are included in the network (default).
+\item \code{"roads_only"}: Only road areas are included.
+\item \code{"roads_no_entrances"}: Only road areas are included,
+excluding entrances.
+}}
 }
 \value{
 A list containing the network components:
