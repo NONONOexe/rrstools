@@ -42,8 +42,11 @@ create_network_nodes <- function(map, mode) {
     id        = as.character(last_id + seq(nrow(faces))),
     origin_id = faces$id,
     type      = faces$type,
-    degree    = sapply(faces$edges,
-                      function(face_edges) sum(!is.na(face_edges$neighbour))),
+    degree    = sapply(
+      faces$edges,
+      function(face_edges)
+        sum(!is.na(face_edges$neighbour) & face_edges$neighbour %in% faces$id)
+    ),
     geometry  = sf::st_centroid(faces$geometry)
   )
 
