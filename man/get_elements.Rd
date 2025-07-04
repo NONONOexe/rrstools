@@ -7,6 +7,7 @@
 \alias{get_roads}
 \alias{get_buildings}
 \alias{get_entrances}
+\alias{get_passage}
 \title{Get elements from a RoboCupRescue Simulation map}
 \usage{
 get_nodes(map, ids = character())
@@ -18,6 +19,8 @@ get_roads(map, ids = character())
 get_buildings(map, ids = character())
 
 get_entrances(map, ids = character())
+
+get_passage(map, ids = character())
 }
 \arguments{
 \item{map}{An object of class \code{rrs_map}.}

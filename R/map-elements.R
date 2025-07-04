@@ -103,3 +103,17 @@ get_entrances <- function(map, ids = character()) {
   entrance_ids <- names(is_entrance_vec)[is_entrance_vec]
   roads[roads$id %in% entrance_ids, ]
 }
+
+# Determine if a road is a passage of buildings
+is_passage <- function(road_edges, map) {
+  all(!road_edges$neighbour %in% get_roads(map)$id)
+}
+
+#' @rdname get_elements
+#' @export
+get_passage <- function(map, ids = character()) {
+  roads <- get_roads(map, ids)
+  is_passage_vec <- sapply(roads$edges, is_passage, map)
+  passage_ids <- names(is_passage_vec)[is_passage_vec]
+  roads[roads$id %in% passage_ids, ]
+}

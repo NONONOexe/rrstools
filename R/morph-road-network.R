@@ -15,6 +15,9 @@
 #'   - `"roads_only"`: Only road areas are included.
 #'   - `"roads_no_entrances"`: Only road areas are included,
 #'     excluding entrances.
+#'   When `mode` is set to `"roads_only"` or `"roads_no_entrances"`,
+#'   passages (connections between buildings) are excluded from the network
+#'   to prevent the formation of isolated nodes.
 #' @return A list containing the network components:
 #'   - `nodes`: A sf object of nodes with point geometries.
 #'   - `edges`: A sf object of edges with linestring geometries.
@@ -28,12 +31,15 @@ NULL
 # Create network nodes from map data
 create_network_nodes <- function(map, mode) {
   # Select the relevant faces based on the mode
-  if (mode == "all") faces <- get_faces(map)
-  if (mode == "roads_only") faces <- get_roads(map)
+  faces <- get_faces(map)
+  if (mode != "all") {
+    is_road <- faces$type == "road"
+    is_not_passage <- !faces$id %in% get_passage(map)$id
+    faces <- faces[is_road & is_not_passage, ]
+  }
   if (mode == "roads_no_entrances") {
-    faces <- get_roads(map)
-    entrance_ids <- get_entrances(map)$id
-    faces <- faces[!faces$id %in% entrance_ids, ]
+    is_not_entrance <- !faces$id %in% get_entrances(map)$id
+    faces <- faces[is_not_entrance, ]
   }
 
   # Create face nodes
@@ -73,17 +79,19 @@ create_network_nodes <- function(map, mode) {
 create_network_edges <- function(map, network_nodes) {
   # Create edges from the face node to its border nodes
   faces <- get_faces(map)
-  neighbour_num <- faces$edges |>
-    sapply(function(edges) sum(!is.na(edges$neighbour)))
+  neighbour_num <- sapply(
+    faces$edges,
+    function(edges) sum(!is.na(edges$neighbour))
+  )
   last_id <- max(as.integer(network_nodes$id))
   network_edges <- data.frame(
     id   = as.character(last_id + seq(sum(neighbour_num))),
     type = rep(faces$type, times = neighbour_num),
     from = rep(faces$id, times = neighbour_num),
-    to   = faces$edges |>
-      sapply(function(face_edges)
-        face_edges$edge_hrefs[!is.na(face_edges$neighbour)]) |>
-      unlist(use.names = FALSE)
+    to   = unlist(sapply(
+      faces$edges,
+      function(face_edges) face_edges$edge_hrefs[!is.na(face_edges$neighbour)]
+    ), use.names = FALSE)
   )
 
   # Get the start and end point geometries
