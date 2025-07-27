@@ -16,10 +16,11 @@ the \code{read_rrs_map()}.}
 \item \code{"roads_only"}: Only road areas are included.
 \item \code{"roads_no_entrances"}: Only road areas are included,
 excluding entrances.
+}
+
 When \code{mode} is set to \code{"roads_only"} or \code{"roads_no_entrances"},
 passages (connections between buildings) are excluded from the network
-to prevent the formation of isolated nodes.
-}}
+to prevent the formation of isolated nodes.}
 }
 \value{
 A list containing the network components:

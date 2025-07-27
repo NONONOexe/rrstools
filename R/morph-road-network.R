@@ -15,6 +15,7 @@
 #'   - `"roads_only"`: Only road areas are included.
 #'   - `"roads_no_entrances"`: Only road areas are included,
 #'     excluding entrances.
+#'
 #'   When `mode` is set to `"roads_only"` or `"roads_no_entrances"`,
 #'   passages (connections between buildings) are excluded from the network
 #'   to prevent the formation of isolated nodes.
