@@ -18,7 +18,7 @@ print.rrs_map <- function(x, ...) {
       nrow(x$nodes), nrow(x$edges), nrow(x$faces)))
 
   bbox <- sf::st_bbox(x$nodes)
-  cat(sprintf("Bounding box: xmin: %d ymin: %d xmax: %d ymax: %d\n",
+  cat(sprintf("Bounding box: xmin: %f ymin: %f xmax: %f ymax: %f\n",
       bbox["xmin"], bbox["ymin"], bbox["xmax"], bbox["ymax"]))
 
   invisible(x)
