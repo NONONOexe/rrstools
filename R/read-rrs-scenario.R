@@ -47,4 +47,6 @@ read_rrs_scenario <- function(xml) {
     ))
   )
   class(rrs_scenario) <- c("rrs_scenario", "data.frame")
+
+  return(rrs_scenario)
 }
