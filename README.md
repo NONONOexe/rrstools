@@ -54,13 +54,42 @@ map <- read_rrs_map(gml)
 map
 #> RoboCupRescue Simulation map object
 #> Number of elements: nodes: 315 edges: 413 faces: 95
-#> Bounding box: xmin: -30 ymin: -20 xmax: 135 ymax: 121
+#> Bounding box: xmin: -30.000000 ymin: -20.000000 xmax: 135.000000 ymax: 121.000000
 
 # Plot the map data
 plot(map)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example-map-1.png" width="100%" />
+
+It is possible to overlay scenario data on the map.
+
+``` r
+# Sample scenario file
+xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
+
+# Read the scenario data from the XML file
+scenario <- read_rrs_scenario(xml)
+
+# Print the scenario data
+scenario
+#> RoboCupRescue Simulation scenario object
+#> Number of entities: 35
+#> Entities by type:
+#>             Type Count
+#>  ambulancecentre     1
+#>    ambulanceteam     4
+#>         civilian    20
+#>      firebrigade     6
+#>      firestation     1
+#>      policeforce     1
+#>           refuge     2
+
+# Plot the map with the scenario data
+plot(map, scenario)
+```
+
+<img src="man/figures/README-example-scenario-1.png" width="100%" />
 
 ## Code of conduct
 

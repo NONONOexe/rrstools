@@ -2,7 +2,7 @@
 % Please edit documentation in R/rrs-map.R
 \name{print.rrs_map}
 \alias{print.rrs_map}
-\title{Print a rrs map object}
+\title{Print a RoboCupRescue Simulation map object}
 \usage{
 \method{print}{rrs_map}(x, ...)
 }
