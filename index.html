@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">rrstools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,11 +96,36 @@
 <span><span class="va">map</span></span>
 <span><span class="co">#&gt; RoboCupRescue Simulation map object</span></span>
 <span><span class="co">#&gt; Number of elements: nodes: 315 edges: 413 faces: 95</span></span>
-<span><span class="co">#&gt; Bounding box: xmin: -30 ymin: -20 xmax: 135 ymax: 121</span></span>
+<span><span class="co">#&gt; Bounding box: xmin: -30.000000 ymin: -20.000000 xmax: 135.000000 ymax: 121.000000</span></span>
 <span></span>
 <span><span class="co"># Plot the map data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-1.png" width="100%"></p>
+<p><img src="reference/figures/README-example-map-1.png" width="100%"></p>
+<p>It is possible to overlay scenario data on the map.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Sample scenario file</span></span>
+<span><span class="va">xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"scenario-test.xml"</span>, package <span class="op">=</span> <span class="st">"rrstools"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Read the scenario data from the XML file</span></span>
+<span><span class="va">scenario</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_rrs_scenario.html">read_rrs_scenario</a></span><span class="op">(</span><span class="va">xml</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the scenario data</span></span>
+<span><span class="va">scenario</span></span>
+<span><span class="co">#&gt; RoboCupRescue Simulation scenario object</span></span>
+<span><span class="co">#&gt; Number of entities: 35</span></span>
+<span><span class="co">#&gt; Entities by type:</span></span>
+<span><span class="co">#&gt;             Type Count</span></span>
+<span><span class="co">#&gt;  ambulancecentre     1</span></span>
+<span><span class="co">#&gt;    ambulanceteam     4</span></span>
+<span><span class="co">#&gt;         civilian    20</span></span>
+<span><span class="co">#&gt;      firebrigade     6</span></span>
+<span><span class="co">#&gt;      firestation     1</span></span>
+<span><span class="co">#&gt;      policeforce     1</span></span>
+<span><span class="co">#&gt;           refuge     2</span></span>
+<span></span>
+<span><span class="co"># Plot the map with the scenario data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">map</span>, <span class="va">scenario</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-scenario-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
