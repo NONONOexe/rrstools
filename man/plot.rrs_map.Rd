@@ -2,10 +2,11 @@
 % Please edit documentation in R/rrs-map.R
 \name{plot.rrs_map}
 \alias{plot.rrs_map}
-\title{Plot a rrs map}
+\title{Plot a RoboCupRescue Simulation map}
 \usage{
 \method{plot}{rrs_map}(
   x,
+  scenario = NULL,
   building_colour = "#f0e7d8",
   building_border = "#121212",
   road_colour = "#dbdbdb",
@@ -17,6 +18,9 @@
 \arguments{
 \item{x}{An object class \code{rrs_map}.}
 
+\item{scenario}{An object of class \code{rrs_scenario}. If provided, entities
+from the scenario will be plotted on the map. Defaults to \code{NULL}.}
+
 \item{building_colour}{The colour of the buildings.}
 
 \item{building_border}{The border colour of the buildings.}
@@ -27,15 +31,47 @@
 
 \item{background_colour}{The background colour of the plot.}
 
-\item{...}{Additional arguments passed to \code{par}.}
+\item{...}{Additional arguments passed to \code{par()}.}
 }
 \description{
-\code{plot.rrs_map} visualizes a \code{rrs_map} object, displaying the geographical
-features such as buildings and roads. It leverages the \code{sf} package's
-plotting capbilities to render the map components.
+\code{plot} visualizes a \code{rrs_map} object, displaying the geographical
+features such as buildings and roads. If a \code{rrs_scenario} object is
+provided, it also overlays the initial locations of rescue platoons,
+civilians, and special buildings from the scenario.
+It leverages the \code{sf} package's plotting capabilities to render
+the map components.
+}
+\details{
+\code{plot} first plots the basic map layout, including buildings and roads.
+Then, if a scenario is given, it plots the following entities:
+\itemize{
+\item \strong{Refuges}: Plotted in green (\verb{#00ff00}), with the capacity
+displayed.
+\item \strong{Fire Stations}: Plotted in yellow (\verb{#ffff00}).
+\item \strong{Ambulance Centres}: Plotted in white (\verb{#ffffff}).
+\item \strong{Police Offices}: Plotted in blue (\verb{#0000ff}).
+\item \strong{Civilians}: Plotted as green circles (\verb{#00ff00}),
+with the number indicating the count at that location.
+\item \strong{Fire Brigades}: Plotted as red circles (\verb{#ff0000}),
+with the number indicating the count at that location.
+\item \strong{Ambulance Teams}: Plotted as white circles (\verb{#ffffff}),
+with the number indicating the count at that location.
+\item \strong{Police Forces}: Plotted as blue circles (\verb{#0000ff}),
+with the number indicating the count at that location.
+}
+The positions of human entities (agents and civilians) are slightly offset
+from the center of their location to avoid overlap.
 }
 \examples{
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 map <- read_rrs_map(gml)
+
+# Plot only the map
 plot(map)
+
+# Plot the map with a scenario
+xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
+scenario <- read_rrs_scenario(xml)
+plot(map, scenario)
+
 }

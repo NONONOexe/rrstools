@@ -50,7 +50,7 @@ pak::pak("nononoexe/rrstools")
 
 This package provides functions to read and plot RRS map data.
 
-```{r example}
+```{r example-map}
 library(rrstools)
 
 # Sample GML file
@@ -64,6 +64,22 @@ map
 
 # Plot the map data
 plot(map)
+```
+
+It is possible to overlay scenario data on the map.
+
+```{r example-scenario}
+# Sample scenario file
+xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
+
+# Read the scenario data from the XML file
+scenario <- read_rrs_scenario(xml)
+
+# Print the scenario data
+scenario
+
+# Plot the map with the scenario data
+plot(map, scenario)
 ```
 
 ## Code of conduct

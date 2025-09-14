@@ -2,6 +2,7 @@
 
 S3method(plot,rrs_map)
 S3method(print,rrs_map)
+S3method(print,rrs_scenario)
 export(get_buildings)
 export(get_edges)
 export(get_entrances)
