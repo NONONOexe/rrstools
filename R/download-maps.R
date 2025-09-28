@@ -38,6 +38,7 @@ download_maps <- function(years        = 2024,
   }
 
   # Filter the map data based on user input
+  utils::data("competition_maps", package = "rrstools")
   filtered_maps <- competition_maps
   if (!is.null(years) && 0 < length(years)) {
     filtered_maps <- filtered_maps[competition_maps$year %in% years, ]
