@@ -9,7 +9,7 @@ from the official website. It allows filtering by year and map name."><meta prop
 
     <a class="navbar-brand me-2" href="../index.html">rrstools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,8 +79,10 @@ to be installed and available in the system's PATH. Defaults to <code>FALSE</cod
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Invisibly returns a character vector of the local paths to the
-successfully downloaded files. Returns an empty character vector if
+    <p>Invisibly returns a character vector of the local paths corresponding
+to the results of the process. If extraction is successful, the path to
+the newly created data directory is returned; otherwise, the path to the
+downloaded archive file is returned. Returns an empty character vector if
 no files were downloaded.</p>
     </div>
 
