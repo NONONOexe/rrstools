@@ -31,8 +31,10 @@ Note: This feature requires the 7-Zip command-line tool (\verb{7z})
 to be installed and available in the system's PATH. Defaults to \code{FALSE}.}
 }
 \value{
-Invisibly returns a character vector of the local paths to the
-successfully downloaded files. Returns an empty character vector if
+Invisibly returns a character vector of the local paths corresponding
+to the results of the process. If extraction is successful, the path to
+the newly created data directory is returned; otherwise, the path to the
+downloaded archive file is returned. Returns an empty character vector if
 no files were downloaded.
 }
 \description{

@@ -17,8 +17,10 @@
 #'   will be removed upon successful extraction.
 #'   Note: This feature requires the 7-Zip command-line tool (`7z`)
 #'   to be installed and available in the system's PATH. Defaults to `FALSE`.
-#' @return Invisibly returns a character vector of the local paths to the
-#'   successfully downloaded files. Returns an empty character vector if
+#' @return Invisibly returns a character vector of the local paths corresponding
+#'   to the results of the process. If extraction is successful, the path to
+#'   the newly created data directory is returned; otherwise, the path to the
+#'   downloaded archive file is returned. Returns an empty character vector if
 #'   no files were downloaded.
 #' @export
 #' @examples
@@ -73,6 +75,10 @@ download_and_extract_single <- function(url, download_dir, extract) {
   file_name <- basename(url)
   dest_path <- file.path(download_dir, file_name)
 
+  # Determine the expected extracted directory name (remove the last extension)
+  extracted_dir_name <- sub("\\.[^.]+$", "", file_name)
+  extracted_path <- file.path(download_dir, extracted_dir_name)
+
   message(paste("Processing", file_name, "..."))
 
   # Download the file
@@ -103,23 +109,30 @@ download_and_extract_single <- function(url, download_dir, extract) {
             message(" -> Removing archive file...")
             file.remove(dest_path)
             message(" -> Archive file removed.")
+
+            # Return the path to the newly created directory
+            return(extracted_path)
           } else {
             warning("Extraction failed for '", file_name, "'. ",
                     "The archive file was not removed.")
+            return(dest_path)
           }
         } else {
           # Inform the user if 7z command is not found
           warning("Could not extract '", file_name, "'. \n",
                   "'7z' command was not found. Please install 7-zip and ",
                   "ensure it is in your system's PATH.")
+          return(dest_path)
         }
       } else {
         # Warn if the file type is not supported for extraction
         warning("Extraction is not supported for this file type: '",
                 file_name, "'. Skipping extraction.")
+        return(dest_path)
       }
     }
-    # Return the destination path on success
+
+    # Return the path to the downloaded archive file
     return(dest_path)
   }, error = function(e) {
     warning("Failed to download or process ", url, "\n",
