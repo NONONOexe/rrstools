@@ -62,7 +62,7 @@ print.rrs_map <- function(x, ...) {
 #' @param road_colour The colour of the roads.
 #' @param road_border The border colour of the roads.
 #' @param background_colour The background colour of the plot.
-#' @param ... Additional arguments passed to `par()`.
+#' @param ... Additional arguments passed to `plot()`.
 #'
 #' @examples
 #' gml <- system.file("extdata", "map-test.gml", package = "rrstools")
@@ -85,12 +85,12 @@ plot.rrs_map <- function(x,
                          road_border       = "#121212",
                          background_colour = NA,
                          ...) {
-  graphics::par(...)
   plot(
     get_buildings(x)$geometry,
     col    = building_colour,
     border = building_border,
-    bg     = background_colour
+    bg     = background_colour,
+    ...
   )
   plot(
     get_roads(x)$geometry,

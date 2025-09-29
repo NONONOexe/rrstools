@@ -31,7 +31,7 @@ from the scenario will be plotted on the map. Defaults to \code{NULL}.}
 
 \item{background_colour}{The background colour of the plot.}
 
-\item{...}{Additional arguments passed to \code{par()}.}
+\item{...}{Additional arguments passed to \code{plot()}.}
 }
 \description{
 \code{plot} visualizes a \code{rrs_map} object, displaying the geographical
