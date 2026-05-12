@@ -1,0 +1,121 @@
+# rrstools
+
+## Installation
+
+You can install the development version of rrstools using the following
+methods:
+
+### Using `install.packages()` (R-universe)
+
+``` r
+
+# Enable the R-universe
+options(repos = c(
+  nononoexe = "https://nononoexe.r-universe.dev",
+  cran = "https://cloud.r-project.org"
+))
+
+# Install the package
+install.packages("rrstools")
+```
+
+### Using `pak`
+
+``` r
+
+# install.packages("pak")
+pak::pak("nononoexe/rrstools")
+```
+
+## Usage
+
+This package provides functions to read and plot RRS map data.
+
+``` r
+
+library(rrstools)
+
+# Sample GML file
+gml <- system.file("extdata", "map-test.gml", package = "rrstools")
+
+# Read the map data from the GML file
+map <- read_rrs_map(gml)
+
+# Print the map data
+map
+#> RoboCupRescue Simulation map object
+#> Number of elements: nodes: 315 edges: 413 faces: 95
+#> Bounding box: xmin: -30.000000 ymin: -20.000000 xmax: 135.000000 ymax: 121.000000
+
+# Plot the map data
+plot(map)
+```
+
+![](reference/figures/README-example-map-1.png)
+
+It is possible to overlay scenario data on the map.
+
+``` r
+
+# Sample scenario file
+xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
+
+# Read the scenario data from the XML file
+scenario <- read_rrs_scenario(xml)
+
+# Print the scenario data
+scenario
+#> RoboCupRescue Simulation scenario object
+#> Number of entities: 35
+#> Entities by type:
+#>             Type Count
+#>  ambulancecentre     1
+#>    ambulanceteam     4
+#>         civilian    20
+#>      firebrigade     6
+#>      firestation     1
+#>      policeforce     1
+#>           refuge     2
+
+# Plot the map with the scenario data
+plot(map, scenario)
+```
+
+![](reference/figures/README-example-scenario-1.png)
+
+## Code of conduct
+
+Please note that this project is released with a [Contributor Code of
+Conduct](https://nononoexe.github.io/rrstools/CODE_OF_CONDUCT.html). By
+participating in this project you agree to abide by its terms.
+
+# Package index
+
+## All functions
+
+- [`competition_maps`](https://nononoexe.github.io/rrstools/reference/competition_maps.md)
+  : RoboCupRescue Simulation competition maps
+- [`download_maps()`](https://nononoexe.github.io/rrstools/reference/download_maps.md)
+  : Download RoboCupRescue Simulation maps
+- [`get_nodes()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
+  [`get_edges()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
+  [`get_roads()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
+  [`get_buildings()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
+  [`get_entrances()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
+  [`get_passage()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
+  : Get elements from a RoboCupRescue Simulation map
+- [`morph_road_network()`](https://nononoexe.github.io/rrstools/reference/morph_road_network.md)
+  : Morph raw map data into a road network
+- [`plot(`*`<rrs_map>`*`)`](https://nononoexe.github.io/rrstools/reference/plot.rrs_map.md)
+  : Plot a RoboCupRescue Simulation map
+- [`plot.rrs_scenario`](https://nononoexe.github.io/rrstools/reference/plot.rrs_scenario.md)
+  : Plot a RRS scenario object (Not supported directly)
+- [`print(`*`<rrs_map>`*`)`](https://nononoexe.github.io/rrstools/reference/print.rrs_map.md)
+  : Print a RoboCupRescue Simulation map object
+- [`print(`*`<rrs_scenario>`*`)`](https://nononoexe.github.io/rrstools/reference/print.rrs_scenario.md)
+  : Print a RRS scenario object
+- [`read_rrs_map()`](https://nononoexe.github.io/rrstools/reference/read_rrs_map.md)
+  : Read RoboCupRescue Simulation map data from GML file
+- [`read_rrs_scenario()`](https://nononoexe.github.io/rrstools/reference/read_rrs_scenario.md)
+  : Read RoboCupRescue Simulation scenario data from XML file
+
