@@ -1,9 +1,9 @@
 Package: rrstools
 Title: Tools for Analyzing RoboCupRescue Simulation Data
-Version: 0.3.3
+Version: 0.3.4
 Authors@R: 
     person("Keisuke", "ANDO",
-           email   = "ando@maslab.aitech.ac.jp",
+           email   = "ando_k@iwate-pu.ac.jp",
            role    = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-4085-2067"))
 Description: Provides functions for analyzing RoboCupRescue Simulation data.
