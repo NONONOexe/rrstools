@@ -89,16 +89,18 @@ create_node_sf <- function(nodes, scale_data) {
 
 # Create an sf object (LINESTRINGs) for nodes from edge data
 create_edge_sf <- function(edges, node_sf) {
-  source_nodes <- node_sf$geometry[match(edges$start_node_id, node_sf$id)]
-  target_nodes <- node_sf$geometry[match(edges$end_node_id, node_sf$id)]
-  geometries   <- mapply(
-    function(p1, p2) sf::st_linestring(c(p1, p2)),
-    source_nodes, target_nodes, SIMPLIFY = FALSE
+  coords    <- sf::st_coordinates(node_sf)
+  start_idx <- match(edges$start_node_id, node_sf$id)
+  end_idx   <- match(edges$end_node_id, node_sf$id)
+
+  geometries <- create_linestrings_cpp(
+    coords[start_idx, 1], coords[start_idx, 2],
+    coords[end_idx, 1],   coords[end_idx, 2]
   )
 
   sf::st_sf(
     edges,
-    geometry = geometries,
+    geometry = sf::st_sfc(geometries),
     crs      = NA,
     agr      = "constant"
   )
@@ -106,19 +108,16 @@ create_edge_sf <- function(edges, node_sf) {
 
 # Create an sf object (POLYGONs) for nodes from face data
 create_face_sf <- function(faces, edge_sf) {
-  geometries <- sapply(faces$edges, function(face) {
-    edge_ids <- face$edge_hrefs
-    lines    <- edge_sf$geometry[match(edge_ids, edge_sf$id)]
+  face_hrefs <- lapply(faces$edges, `[[`, "edge_hrefs")
+  geom_list  <- unclass(edge_sf$geometry)
+  all_lines  <- create_face_multilinestrings_cpp(face_hrefs, edge_sf$id, geom_list)
 
-    sf::st_collection_extract(
-      sf::st_polygonize(sf::st_union(lines)),
-      "POLYGON"
-    )
-  })
+  combined <- sf::st_sfc(all_lines)
+  polygons  <- sf::st_collection_extract(sf::st_polygonize(combined), "POLYGON")
 
   sf::st_sf(
     faces,
-    geometry = geometries,
+    geometry = polygons,
     crs      = NA,
     agr      = "constant"
   )

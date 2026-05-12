@@ -39,6 +39,7 @@ print.rrs_scenario <- function(x, ...) {
 #' @usage
 #' # Collect usage:
 #' # plot(map, scenario)
+#' @exportS3Method
 plot.rrs_scenario <- function(x, ...) {
   stop(
     "Cannot plot a scenario without map data.\n",
