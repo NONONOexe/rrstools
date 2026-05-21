@@ -1,6 +1,6 @@
 # Morph raw map data into a road network
 
-`morph_road_network()` converts map data from the RoboCup Rescue
+`morph_road_network()` converts map data from the RoboCupRescue
 Simulation into a road network.
 
 ## Usage
@@ -18,7 +18,7 @@ morph_road_network(map, mode = c("all", "roads_only", "roads_no_entrances"))
 
 - mode:
 
-  A character string specifiying the mode of the road network:
+  A character string specifying the mode of the road network:
 
   - `"all"`: All areas are included in the network (default).
 

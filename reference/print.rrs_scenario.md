@@ -21,6 +21,10 @@ print(x, ...)
 
   Not used.
 
+## Value
+
+Invisibly returns `x` (called for side effects).
+
 ## Examples
 
 ``` r

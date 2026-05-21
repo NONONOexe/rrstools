@@ -58,6 +58,10 @@ plot(
   Additional arguments passed to
   [`plot()`](https://rdrr.io/r/graphics/plot.default.html).
 
+## Value
+
+Invisibly returns `NULL` (called for side effects).
+
 ## Details
 
 `plot` first plots the basic map layout, including buildings and roads.

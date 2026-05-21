@@ -10,10 +10,5 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Keisuke ANDO <ando@maslab.aitech.ac.jp>
+**Maintainer**: Keisuke Ando <ando_k@iwate-pu.ac.jp>
 ([ORCID](https://orcid.org/0009-0002-4085-2067))
-
-Authors:
-
-- Keisuke ANDO <ando@maslab.aitech.ac.jp>
-  ([ORCID](https://orcid.org/0009-0002-4085-2067))
