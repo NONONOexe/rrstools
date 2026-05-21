@@ -7,10 +7,10 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/rrstools)](https://CRAN.R-project.org/package=rrstools)
 [![Codecov test
 coverage](https://codecov.io/gh/NONONOexe/rrstools/graph/badge.svg)](https://app.codecov.io/gh/NONONOexe/rrstools)
+[![R-universe
+version](https://NONONOexe.r-universe.dev/rrstools/badges/version)](https://NONONOexe.r-universe.dev/rrstools)
 <!-- badges: end -->
 
 ## Installation
@@ -61,7 +61,7 @@ map
 plot(map)
 ```
 
-<img src="man/figures/README-example-map-1.png" alt="" width="100%" />
+<img src="man/figures/README-example-map-1.png" width="100%" />
 
 It is possible to overlay scenario data on the map.
 
@@ -90,7 +90,7 @@ scenario
 plot(map, scenario)
 ```
 
-<img src="man/figures/README-example-scenario-1.png" alt="" width="100%" />
+<img src="man/figures/README-example-scenario-1.png" width="100%" />
 
 ## Code of conduct
 

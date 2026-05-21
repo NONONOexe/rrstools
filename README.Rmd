@@ -18,8 +18,9 @@ devtools::load_all()
 
 <!-- badges: start -->
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![CRAN status](https://www.r-pkg.org/badges/version/rrstools)](https://CRAN.R-project.org/package=rrstools)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test coverage](https://codecov.io/gh/NONONOexe/rrstools/graph/badge.svg)](https://app.codecov.io/gh/NONONOexe/rrstools)
+[![R-universe version](https://NONONOexe.r-universe.dev/rrstools/badges/version)](https://NONONOexe.r-universe.dev/rrstools)
 <!-- badges: end -->
 
 ## Installation

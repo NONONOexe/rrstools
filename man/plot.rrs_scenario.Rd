@@ -12,9 +12,12 @@
 
 \item{...}{Not used.}
 }
+\value{
+Does not return; always throws an error.
+}
 \description{
 A \code{rrs_scenario} object cannot be plotted by itself because it lacks the
-necessary spatial conext provided by a map. This function exists to
+necessary spatial context provided by a map. This function exists to
 intercept calls to \code{plot(scenario)} and provide a helpful error message.
 }
 \details{

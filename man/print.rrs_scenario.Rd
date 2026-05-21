@@ -11,6 +11,9 @@
 
 \item{...}{Not used.}
 }
+\value{
+Invisibly returns \code{x} (called for side effects).
+}
 \description{
 \code{print} prints a concise summary of a \code{rrs_scenario} object.
 It displays the object type, the total number of entities, and a
@@ -20,4 +23,5 @@ table with the counts of entities for each type.
 xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
 scenario <- read_rrs_scenario(xml)
 scenario
+
 }

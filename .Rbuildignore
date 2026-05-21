@@ -10,3 +10,6 @@
 ^\.positai$
 ^\.claude$
 ^codecov\.yml$
+^dev$
+^cran-comments\.md$
+^CRAN-SUBMISSION$

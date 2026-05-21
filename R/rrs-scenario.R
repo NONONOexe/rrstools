@@ -6,10 +6,13 @@
 #'
 #' @param x An object class `rrs_scenario`.
 #' @param ... Not used.
+#' @return Invisibly returns \code{x} (called for side effects).
+#'
 #' @examples
 #' xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
 #' scenario <- read_rrs_scenario(xml)
 #' scenario
+#'
 #' @export
 print.rrs_scenario <- function(x, ...) {
   cat("RoboCupRescue Simulation scenario object\n")
@@ -28,7 +31,7 @@ print.rrs_scenario <- function(x, ...) {
 #' Plot a RRS scenario object (Not supported directly)
 #'
 #' A `rrs_scenario` object cannot be plotted by itself because it lacks the
-#' necessary spatial conext provided by a map. This function exists to
+#' necessary spatial context provided by a map. This function exists to
 #' intercept calls to `plot(scenario)` and provide a helpful error message.
 #'
 #' To visualize a scenario, you must plot it together with a `rrs_map`
@@ -39,11 +42,14 @@ print.rrs_scenario <- function(x, ...) {
 #' @usage
 #' # Collect usage:
 #' # plot(map, scenario)
-#' @exportS3Method
+#' @return Does not return; always throws an error.
+#' @export
 plot.rrs_scenario <- function(x, ...) {
   stop(
     "Cannot plot a scenario without map data.\n",
     "Please use `plot(map, scenario)` to visualize the scenario.",
     call. = FALSE
   )
+
+  return(invisible(NULL))
 }

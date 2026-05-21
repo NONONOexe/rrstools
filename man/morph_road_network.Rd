@@ -10,7 +10,7 @@ morph_road_network(map, mode = c("all", "roads_only", "roads_no_entrances"))
 \item{map}{\code{rrs_map} data, the GML map data loaded by
 the \code{read_rrs_map()}.}
 
-\item{mode}{A character string specifiying the mode of the road network:
+\item{mode}{A character string specifying the mode of the road network:
 \itemize{
 \item \code{"all"}: All areas are included in the network (default).
 \item \code{"roads_only"}: Only road areas are included.
@@ -30,7 +30,7 @@ A list containing the network components:
 }
 }
 \description{
-\code{morph_road_network()} converts map data from the RoboCup Rescue Simulation
+\code{morph_road_network()} converts map data from the RoboCupRescue Simulation
 into a road network.
 }
 \details{

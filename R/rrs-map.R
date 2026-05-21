@@ -6,10 +6,13 @@
 #'
 #' @param x An object class `rrs_map`.
 #' @param ... Not used.
+#' @return Invisibly returns \code{x} (called for side effects).
+#'
 #' @examples
 #' gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 #' map <- read_rrs_map(gml)
 #' map
+#'
 #' @export
 print.rrs_map <- function(x, ...) {
   cat("RoboCupRescue Simulation map object\n")
@@ -63,6 +66,7 @@ print.rrs_map <- function(x, ...) {
 #' @param road_border The border colour of the roads.
 #' @param background_colour The background colour of the plot.
 #' @param ... Additional arguments passed to `plot()`.
+#' @return Invisibly returns \code{NULL} (called for side effects).
 #'
 #' @examples
 #' gml <- system.file("extdata", "map-test.gml", package = "rrstools")

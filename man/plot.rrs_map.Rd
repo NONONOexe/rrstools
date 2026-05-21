@@ -33,6 +33,9 @@ from the scenario will be plotted on the map. Defaults to \code{NULL}.}
 
 \item{...}{Additional arguments passed to \code{plot()}.}
 }
+\value{
+Invisibly returns \code{NULL} (called for side effects).
+}
 \description{
 \code{plot} visualizes a \code{rrs_map} object, displaying the geographical
 features such as buildings and roads. If a \code{rrs_scenario} object is

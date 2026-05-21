@@ -11,6 +11,9 @@
 
 \item{...}{Not used.}
 }
+\value{
+Invisibly returns \code{x} (called for side effects).
+}
 \description{
 \code{print} prints a concise summary of a \code{rrs_map} object.
 It displays the object type, the number of nodes, edges, and faces it
@@ -20,4 +23,5 @@ contains, its overall bounding box.
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 map <- read_rrs_map(gml)
 map
+
 }

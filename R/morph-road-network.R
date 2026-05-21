@@ -1,6 +1,6 @@
 #' Morph raw map data into a road network
 #'
-#' `morph_road_network()` converts map data from the RoboCup Rescue Simulation
+#' `morph_road_network()` converts map data from the RoboCupRescue Simulation
 #' into a road network.
 #'
 #' This road network consists of nodes and edges. Nodes are defined as
@@ -10,7 +10,7 @@
 #' @name morph_road_network
 #' @param map `rrs_map` data, the GML map data loaded by
 #'   the `read_rrs_map()`.
-#' @param mode A character string specifiying the mode of the road network:
+#' @param mode A character string specifying the mode of the road network:
 #'   - `"all"`: All areas are included in the network (default).
 #'   - `"roads_only"`: Only road areas are included.
 #'   - `"roads_no_entrances"`: Only road areas are included,
