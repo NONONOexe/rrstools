@@ -4,7 +4,7 @@
 \name{rrstools-package}
 \alias{rrstools}
 \alias{rrstools-package}
-\title{rrstools: Tools for Analyzing RoboCupRescue Simulation Data}
+\title{rrstools: Analyzing RoboCupRescue Simulation Data}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
@@ -19,6 +19,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Keisuke Ando \email{ando_k@iwate-pu.ac.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
+
+Authors:
+\itemize{
+  \item Keisuke Ando \email{ando_k@iwate-pu.ac.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
+}
 
 }
 \keyword{internal}
