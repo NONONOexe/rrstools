@@ -1,6 +1,10 @@
-# rrstools: Tools for Analyzing RoboCupRescue Simulation Data
+# rrstools: Analyzing RoboCupRescue Simulation Data
 
-Provides functions for analyzing RoboCupRescue Simulation data.
+Tools for analyzing data from RoboCupRescue Simulation (RRS)
+<https://rescuesim.robocup.org>, a disaster rescue simulation platform.
+Supports reading virtual city map and disaster scenario files into
+analyzable data structures and provides functions for their
+visualization.
 
 ## See also
 
@@ -10,5 +14,10 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Keisuke Ando <ando_k@iwate-pu.ac.jp>
+**Maintainer**: Keisuke Ando <nononoexe@ymail.ne.jp>
 ([ORCID](https://orcid.org/0009-0002-4085-2067))
+
+Authors:
+
+- Keisuke Ando <nononoexe@ymail.ne.jp>
+  ([ORCID](https://orcid.org/0009-0002-4085-2067))

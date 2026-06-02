@@ -1,11 +1,22 @@
 # rrstools
 
+## Overview
+
+rrstools is an R package for analyzing data from [RoboCupRescue
+Simulation (RRS)](https://rescuesim.robocup.org/), a disaster response
+simulation platform where autonomous agents work together to rescue
+civilians and minimize damage in a simulated urban earthquake disaster.
+This package aims to support both competitors developing rescue agents
+and researchers studying multi-agent systems, by providing tools to
+read, visualize, and analyze RRS data — including map data, scenario
+configurations.
+
 ## Installation
 
 You can install the development version of rrstools using the following
 methods:
 
-### Using `install.packages()` (R-universe)
+### Using install.packages() (R-universe)
 
 ``` r
 
@@ -19,7 +30,7 @@ options(repos = c(
 install.packages("rrstools")
 ```
 
-### Using `pak`
+### Using pak
 
 ``` r
 
@@ -29,13 +40,15 @@ pak::pak("nononoexe/rrstools")
 
 ## Usage
 
+### Reading and plotting map data
+
 This package provides functions to read and plot RRS map data.
 
 ``` r
 
 library(rrstools)
 
-# Sample GML file
+# Sample GML file bundled with the package
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 
 # Read the map data from the GML file
@@ -53,11 +66,13 @@ plot(map)
 
 ![](reference/figures/README-example-map-1.png)
 
+### Overlaying scenario data
+
 It is possible to overlay scenario data on the map.
 
 ``` r
 
-# Sample scenario file
+# Sample scenario file bundled with the package
 xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
 
 # Read the scenario data from the XML file
@@ -83,7 +98,7 @@ plot(map, scenario)
 
 ![](reference/figures/README-example-scenario-1.png)
 
-## Code of conduct
+## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://nononoexe.github.io/rrstools/CODE_OF_CONDUCT.html). By
@@ -93,10 +108,8 @@ participating in this project you agree to abide by its terms.
 
 ## All functions
 
-- [`competition_maps`](https://nononoexe.github.io/rrstools/reference/competition_maps.md)
-  : RoboCupRescue Simulation competition maps
-- [`download_maps()`](https://nononoexe.github.io/rrstools/reference/download_maps.md)
-  : Download RoboCupRescue Simulation maps
+- [`download_scenarios()`](https://nononoexe.github.io/rrstools/reference/download_scenarios.md)
+  : Download RoboCupRescue Simulation scenarios
 - [`get_nodes()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
   [`get_edges()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
   [`get_roads()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
@@ -104,6 +117,10 @@ participating in this project you agree to abide by its terms.
   [`get_entrances()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
   [`get_passage()`](https://nononoexe.github.io/rrstools/reference/get_elements.md)
   : Get elements from a RoboCupRescue Simulation map
+- [`get_hub_url()`](https://nononoexe.github.io/rrstools/reference/get_hub_url.md)
+  : Get the URL of the RCRS Scenario Hub
+- [`get_scenarios()`](https://nononoexe.github.io/rrstools/reference/get_scenarios.md)
+  : Get available scenarios from the RCRS Scenario Hub
 - [`morph_road_network()`](https://nononoexe.github.io/rrstools/reference/morph_road_network.md)
   : Morph raw map data into a road network
 - [`plot(`*`<rrs_map>`*`)`](https://nononoexe.github.io/rrstools/reference/plot.rrs_map.md)
@@ -118,4 +135,6 @@ participating in this project you agree to abide by its terms.
   : Read RoboCupRescue Simulation map data from GML file
 - [`read_rrs_scenario()`](https://nononoexe.github.io/rrstools/reference/read_rrs_scenario.md)
   : Read RoboCupRescue Simulation scenario data from XML file
+- [`set_hub_url()`](https://nononoexe.github.io/rrstools/reference/set_hub_url.md)
+  : Set the URL of the RCRS Scenario Hub
 
