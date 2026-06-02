@@ -23,7 +23,8 @@ Imports:
     xml2
 Suggests: 
     spelling,
-    testthat (>= 3.3.0)
+    testthat (>= 3.3.0),
+    withr
 LinkingTo: 
     cpp11
 Config/testthat/edition: 3
