@@ -26,13 +26,13 @@ devtools::load_all()
 ## Overview
 
 rrstools is an R package for analyzing data from [RoboCupRescue Simulation (RRS)](https://rescuesim.robocup.org/), a disaster response simulation platform where autonomous agents work together to rescue civilians and minimize damage in a simulated urban earthquake disaster.
-This package aims to support both competitors developing rescue agents and researchers studying multi-agent systems, by providing tools to read, visualize, and analyze RRS data — including map data, scenario configurations.
+This package aims to support both competitors developing rescue agents and researchers studying multi-agent systems, by providing tools to read, visualize, and analyze RRS data such as map data and scenario configurations.
 
 ## Installation
 
 You can install the development version of rrstools using the following methods:
 
-### Using `install.packages()` (R-universe)
+### Using install.packages() (R-universe)
 
 ``` r
 # Enable the R-universe
@@ -45,7 +45,7 @@ options(repos = c(
 install.packages("rrstools")
 ```
 
-### Using `pak`
+### Using pak
 
 ``` r
 # install.packages("pak")

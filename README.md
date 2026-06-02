@@ -29,7 +29,7 @@ configurations.
 You can install the development version of rrstools using the following
 methods:
 
-### Using `install.packages()` (R-universe)
+### Using install.packages() (R-universe)
 
 ``` r
 # Enable the R-universe
@@ -42,7 +42,7 @@ options(repos = c(
 install.packages("rrstools")
 ```
 
-### Using `pak`
+### Using pak
 
 ``` r
 # install.packages("pak")
@@ -74,7 +74,7 @@ map
 plot(map)
 ```
 
-<img src="man/figures/README-example-map-1.png" alt="" width="100%" />
+<img src="man/figures/README-example-map-1.png" width="100%" />
 
 ### Overlaying scenario data
 
@@ -105,7 +105,7 @@ scenario
 plot(map, scenario)
 ```
 
-<img src="man/figures/README-example-scenario-1.png" alt="" width="100%" />
+<img src="man/figures/README-example-scenario-1.png" width="100%" />
 
 ## Code of Conduct
 
