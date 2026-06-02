@@ -17,7 +17,7 @@
 #'     \item{country}{Name of the country where the city is located}
 #'     \item{lat}{Latitude of the map location. If the exact location is
 #'       unknown, the center of the city is used.}
-#'     \item{long}{Longitude of the map location. If the exact location is
+#'     \item{lon}{Longitude of the map location. If the exact location is
 #'       unknown, the center of the city is used.}
 #'     \item{thumbnail_url}{URL of the thumbnail image of the map}
 #'   }
@@ -33,20 +33,35 @@
 get_scenarios <- function(refresh = FALSE) {
   # Return cache if available
   if (!refresh && !is.null(.rrstools_env$scenarios_cache)) {
-    message("Using cached scenario list.",
+    message("Using cached scenario list. ",
             "Use `get_scenarios(refresh = TRUE)` to re-fetch.")
     return(.rrstools_env$scenarios_cache)
   }
 
   # Fetch scenarios.json
   message("Fetching scenario list from RCRS Scenario Hub...")
+
+  # Initialize a variable to capture low-level warning messages
+  warn_msg <- NULL
+
   tryCatch({
-    json_text <- readLines(url(get_hub_url()), warn = FALSE)
+    # Catch any warning during readLines and store its message
+    withCallingHandlers({
+      json_text <- readLines(url(get_hub_url()), warn = FALSE)
+    }, warning = function(w) {
+      warn_msg <<- w$message
+      invokeRestart("muffleWarning") # Suppress the warning from printing console
+    })
     hub_data  <- jsonlite::fromJSON(paste(json_text, collapse = "\n"),
                                     simplifyVector = FALSE)
   }, error = function(e) {
+    detailed_msg <- e$message
+    if (!is.null(warn_msg)) {
+      detailed_msg <- paste0(detailed_msg, " (", warn_msg, ")")
+    }
+
     stop("Failed to fetch scenario list from RCRS Scenario Hub.\n",
-         "Error: ", e$message, call. = FALSE)
+         "Error: ", detailed_msg, call. = FALSE)
   })
 
   # Convert to data frame
@@ -68,7 +83,7 @@ get_scenarios <- function(refresh = FALSE) {
   scenarios <- do.call(rbind, unlist(rows, recursive = FALSE))
 
   # Save to cache
-  .rrstools_env$scenario_cache <- scenarios
+  .rrstools_env$scenarios_cache <- scenarios
 
   scenarios
 }

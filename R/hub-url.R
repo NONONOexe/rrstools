@@ -13,7 +13,7 @@
 set_hub_url <- function(url) {
   old <- .rrstools_env$hub_url
   .rrstools_env$hub_url <- url
-  .rrstools_env$scenario_cache <- NULL
+  .rrstools_env$scenarios_cache <- NULL
   invisible(old)
 }
 
