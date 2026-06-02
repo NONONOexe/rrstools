@@ -52,11 +52,14 @@ download_scenarios <- function(names,
   }
 
   # Process each scenario
-  message(paste("Found", nrow(scenarios), "scenario(s) to process."))
-  results <- lapply(seq_len(nrow(scenarios)), function(i) {
+  n <- nrow(scenarios)
+  message(paste("Found", n, "scenario(s) to process."))
+  results <- lapply(seq_len(n), function(i) {
     dest_path <- download_scenario(
       url          = scenarios$download_url[i],
-      download_dir = download_dir
+      download_dir = download_dir,
+      index        = i,
+      total        = n
     )
     if (extract && !is.null(dest_path)) {
       extract_scenario(dest_path = dest_path, download_dir = download_dir)
@@ -68,14 +71,16 @@ download_scenarios <- function(names,
   return(invisible(unlist(results)))
 }
 
-download_scenario <- function(url, download_dir) {
+download_scenario <- function(url, download_dir, index, total) {
   file_name <- basename(url)
   dest_path <- file.path(download_dir, file_name)
 
-  message(paste("Processing", file_name, "..."))
+  message(sprintf("[%d/%d] Processing %s ...", index, total, file_name))
   tryCatch({
-    message(" -> Downloading...")
-    utils::download.file(url, destfile = dest_path, mode = "wb", quiet = TRUE)
+    suppressWarnings(
+      utils::download.file(url, destfile = dest_path, mode = "wb", quiet = TRUE)
+    )
+
     message(" -> Download complete.")
     dest_path
   }, error = function(e) {

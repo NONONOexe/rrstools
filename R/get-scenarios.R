@@ -33,8 +33,6 @@
 get_scenarios <- function(refresh = FALSE) {
   # Return cache if available
   if (!refresh && !is.null(.rrstools_env$scenarios_cache)) {
-    message("Using cached scenario list. ",
-            "Use `get_scenarios(refresh = TRUE)` to re-fetch.")
     return(.rrstools_env$scenarios_cache)
   }
 
