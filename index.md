@@ -1,22 +1,11 @@
 # rrstools
 
-## Overview
-
-rrstools is an R package for analyzing data from [RoboCupRescue
-Simulation (RRS)](https://rescuesim.robocup.org/), a disaster response
-simulation platform where autonomous agents work together to rescue
-civilians and minimize damage in a simulated urban earthquake disaster.
-This package aims to support both competitors developing rescue agents
-and researchers studying multi-agent systems, by providing tools to
-read, visualize, and analyze RRS data — including map data, scenario
-configurations.
-
 ## Installation
 
 You can install the development version of rrstools using the following
 methods:
 
-### Using install.packages() (R-universe)
+### Using `install.packages()` (R-universe)
 
 ``` r
 
@@ -30,7 +19,7 @@ options(repos = c(
 install.packages("rrstools")
 ```
 
-### Using pak
+### Using `pak`
 
 ``` r
 
@@ -40,15 +29,13 @@ pak::pak("nononoexe/rrstools")
 
 ## Usage
 
-### Reading and plotting map data
-
 This package provides functions to read and plot RRS map data.
 
 ``` r
 
 library(rrstools)
 
-# Sample GML file bundled with the package
+# Sample GML file
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 
 # Read the map data from the GML file
@@ -66,13 +53,11 @@ plot(map)
 
 ![](reference/figures/README-example-map-1.png)
 
-### Overlaying scenario data
-
 It is possible to overlay scenario data on the map.
 
 ``` r
 
-# Sample scenario file bundled with the package
+# Sample scenario file
 xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
 
 # Read the scenario data from the XML file
@@ -98,7 +83,7 @@ plot(map, scenario)
 
 ![](reference/figures/README-example-scenario-1.png)
 
-## Code of Conduct
+## Code of conduct
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://nononoexe.github.io/rrstools/CODE_OF_CONDUCT.html). By
