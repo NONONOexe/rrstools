@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides functions for analyzing RoboCupRescue Simulation data.
+Tools for analyzing data from RoboCupRescue Simulation (RRS) \url{https://rescuesim.robocup.org}, a disaster rescue simulation platform. Supports reading virtual city map and disaster scenario files into analyzable data structures and provides functions for their visualization.
 }
 \seealso{
 Useful links:
@@ -18,11 +18,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Keisuke Ando \email{ando_k@iwate-pu.ac.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
+\strong{Maintainer}: Keisuke Ando \email{nononoexe@ymail.ne.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
 
 Authors:
 \itemize{
-  \item Keisuke Ando \email{ando_k@iwate-pu.ac.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
+  \item Keisuke Ando \email{nononoexe@ymail.ne.jp} (\href{https://orcid.org/0009-0002-4085-2067}{ORCID})
 }
 
 }

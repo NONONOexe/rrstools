@@ -3,10 +3,13 @@ Title: Analyzing RoboCupRescue Simulation Data
 Version: 1.1.0
 Authors@R: 
     person("Keisuke", "Ando",
-           email   = "ando_k@iwate-pu.ac.jp",
+           email   = "nononoexe@ymail.ne.jp",
            role    = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-4085-2067"))
-Description: Provides functions for analyzing RoboCupRescue Simulation data.
+Description: Tools for analyzing data from RoboCupRescue Simulation (RRS)
+    <https://rescuesim.robocup.org>, a disaster rescue simulation platform.
+    Supports reading virtual city map and disaster scenario files into
+    analyzable data structures and provides functions for their visualization.
 License: MIT + file LICENSE
 URL: https://nononoexe.github.io/rrstools/
 Depends: 

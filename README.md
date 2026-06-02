@@ -13,6 +13,17 @@ coverage](https://codecov.io/gh/NONONOexe/rrstools/graph/badge.svg)](https://app
 version](https://NONONOexe.r-universe.dev/rrstools/badges/version)](https://NONONOexe.r-universe.dev/rrstools)
 <!-- badges: end -->
 
+## Overview
+
+rrstools is an R package for analyzing data from [RoboCupRescue
+Simulation (RRS)](https://rescuesim.robocup.org/), a disaster response
+simulation platform where autonomous agents work together to rescue
+civilians and minimize damage in a simulated urban earthquake disaster.
+This package aims to support both competitors developing rescue agents
+and researchers studying multi-agent systems, by providing tools to
+read, visualize, and analyze RRS data — including map data, scenario
+configurations.
+
 ## Installation
 
 You can install the development version of rrstools using the following
@@ -40,12 +51,14 @@ pak::pak("nononoexe/rrstools")
 
 ## Usage
 
+### Reading and plotting map data
+
 This package provides functions to read and plot RRS map data.
 
 ``` r
 library(rrstools)
 
-# Sample GML file
+# Sample GML file bundled with the package
 gml <- system.file("extdata", "map-test.gml", package = "rrstools")
 
 # Read the map data from the GML file
@@ -61,12 +74,14 @@ map
 plot(map)
 ```
 
-<img src="man/figures/README-example-map-1.png" width="100%" />
+<img src="man/figures/README-example-map-1.png" alt="" width="100%" />
+
+### Overlaying scenario data
 
 It is possible to overlay scenario data on the map.
 
 ``` r
-# Sample scenario file
+# Sample scenario file bundled with the package
 xml <- system.file("extdata", "scenario-test.xml", package = "rrstools")
 
 # Read the scenario data from the XML file
@@ -90,9 +105,9 @@ scenario
 plot(map, scenario)
 ```
 
-<img src="man/figures/README-example-scenario-1.png" width="100%" />
+<img src="man/figures/README-example-scenario-1.png" alt="" width="100%" />
 
-## Code of conduct
+## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://nononoexe.github.io/rrstools/CODE_OF_CONDUCT.html). By
