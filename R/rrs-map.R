@@ -43,7 +43,7 @@ print.rrs_map <- function(x, ...) {
 #'   \item \strong{Refuges}: Plotted in green (`#00ff00`), with the capacity
 #'         displayed.
 #'   \item \strong{Fire Stations}: Plotted in yellow (`#ffff00`).
-#'   \item \strong{Ambulance Centres}: Plotted in white (`#ffffff`).
+#'   \item \strong{Ambulance Centers}: Plotted in white (`#ffffff`).
 #'   \item \strong{Police Offices}: Plotted in blue (`#0000ff`).
 #'   \item \strong{Civilians}: Plotted as green circles (`#00ff00`),
 #'         with the number indicating the count at that location.

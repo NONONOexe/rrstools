@@ -51,7 +51,7 @@ Then, if a scenario is given, it plots the following entities:
 \item \strong{Refuges}: Plotted in green (\verb{#00ff00}), with the capacity
 displayed.
 \item \strong{Fire Stations}: Plotted in yellow (\verb{#ffff00}).
-\item \strong{Ambulance Centres}: Plotted in white (\verb{#ffffff}).
+\item \strong{Ambulance Centers}: Plotted in white (\verb{#ffffff}).
 \item \strong{Police Offices}: Plotted in blue (\verb{#0000ff}).
 \item \strong{Civilians}: Plotted as green circles (\verb{#00ff00}),
 with the number indicating the count at that location.

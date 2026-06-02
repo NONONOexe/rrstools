@@ -21,7 +21,7 @@ A data frame with the following columns:
 \item{country}{Name of the country where the city is located}
 \item{lat}{Latitude of the map location. If the exact location is
 unknown, the center of the city is used.}
-\item{long}{Longitude of the map location. If the exact location is
+\item{lon}{Longitude of the map location. If the exact location is
 unknown, the center of the city is used.}
 \item{thumbnail_url}{URL of the thumbnail image of the map}
 }
