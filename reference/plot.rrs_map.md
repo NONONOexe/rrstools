@@ -72,7 +72,7 @@ Then, if a scenario is given, it plots the following entities:
 
 - **Fire Stations**: Plotted in yellow (`#ffff00`).
 
-- **Ambulance Centers**: Plotted in white (`#ffffff`).
+- **Ambulance Centres**: Plotted in white (`#ffffff`).
 
 - **Police Offices**: Plotted in blue (`#0000ff`).
 
