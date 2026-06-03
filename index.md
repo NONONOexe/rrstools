@@ -16,7 +16,7 @@ configurations.
 You can install the development version of rrstools using the following
 methods:
 
-### Using `install.packages()` (R-universe)
+### Using install.packages() (R-universe)
 
 ``` r
 
@@ -30,7 +30,7 @@ options(repos = c(
 install.packages("rrstools")
 ```
 
-### Using `pak`
+### Using pak
 
 ``` r
 

@@ -47,7 +47,7 @@ A data frame with the following columns:
   Latitude of the map location. If the exact location is unknown, the
   center of the city is used.
 
-- long:
+- lon:
 
   Longitude of the map location. If the exact location is unknown, the
   center of the city is used.
@@ -62,7 +62,6 @@ A data frame with the following columns:
 # \donttest{
 # Get available scenarios
 get_scenarios()
-#> Fetching scenario list from RCRS Scenario Hub...
 #>         name
 #> 1     berlin
 #> 2  eindhoven
