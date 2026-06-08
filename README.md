@@ -11,6 +11,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 coverage](https://codecov.io/gh/NONONOexe/rrstools/graph/badge.svg)](https://app.codecov.io/gh/NONONOexe/rrstools)
 [![R-universe
 version](https://NONONOexe.r-universe.dev/rrstools/badges/version)](https://NONONOexe.r-universe.dev/rrstools)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/rrstools)](https://CRAN.R-project.org/package=rrstools)
 <!-- badges: end -->
 
 ## Overview
@@ -21,7 +23,7 @@ simulation platform where autonomous agents work together to rescue
 civilians and minimize damage in a simulated urban earthquake disaster.
 This package aims to support both competitors developing rescue agents
 and researchers studying multi-agent systems, by providing tools to
-read, visualize, and analyze RRS data — including map data, scenario
+read, visualize, and analyze RRS data such as map data and scenario
 configurations.
 
 ## Installation
