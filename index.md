@@ -8,7 +8,7 @@ simulation platform where autonomous agents work together to rescue
 civilians and minimize damage in a simulated urban earthquake disaster.
 This package aims to support both competitors developing rescue agents
 and researchers studying multi-agent systems, by providing tools to
-read, visualize, and analyze RRS data — including map data, scenario
+read, visualize, and analyze RRS data such as map data and scenario
 configurations.
 
 ## Installation
