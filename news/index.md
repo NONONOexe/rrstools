@@ -1,5 +1,11 @@
 # Changelog
 
+## rrstools 1.1.1
+
+- `create_face_sf()` no longer fails on maps that contain degenerate
+  (zero-area) faces. Such faces are kept as empty polygons, and a
+  warning lists their IDs.
+
 ## rrstools 1.1.0
 
 CRAN release: 2026-06-08
