@@ -106,19 +106,43 @@ create_edge_sf <- function(edges, node_sf) {
   )
 }
 
+# Polygonize a single face; return NULL if no polygon can be built
+polygonize_face <- function(lines) {
+  pg <- suppressWarnings(
+    sf::st_collection_extract(
+      sf::st_polygonize(sf::st_sfc(lines)),
+      "POLYGON"
+    )
+  )
+  if (length(pg) == 0L) return(NULL)
+  pg[[1L]]
+}
+
 # Create an sf object (POLYGONs) for nodes from face data
 create_face_sf <- function(faces, edge_sf) {
   face_hrefs <- lapply(faces$edges, `[[`, "edge_hrefs")
   geom_list  <- unclass(edge_sf$geometry)
   all_lines  <- create_face_multilinestrings_cpp(face_hrefs, edge_sf$id, geom_list)
 
-  combined <- sf::st_sfc(all_lines)
-  polygons  <- sf::st_collection_extract(sf::st_polygonize(combined), "POLYGON")
+  # Polygonize face by face so that rows stay aligned with `faces`
+  polys  <- lapply(all_lines, polygonize_face)
+  failed <- vapply(polys, is.null, logical(1))
+
+  # Keep failed faces as empty POLYGONs and report their IDs
+  if (any(failed)) {
+    polys[failed] <- list(sf::st_polygon())
+    warning(
+      sprintf(
+        "Could not build polygons for %d face(s): %s",
+        sum(failed),
+        paste(utils::head(faces$id[failed], 10L), collapse = ", ")
+      )
+    )
+  }
 
   sf::st_sf(
     faces,
-    geometry = polygons,
-    crs      = NA,
+    geometry = sf::st_sfc(polys),
     agr      = "constant"
   )
 }
