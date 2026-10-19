@@ -1,3 +1,9 @@
+# rrstools 1.1.1
+
+* `create_face_sf()` no longer fails on maps that contain degenerate
+  (zero-area) faces. Such faces are kept as empty polygons, and a warning
+  lists their IDs.
+
 # rrstools 1.1.0
 
 * Added features to interact with the [RCRS Scenario Hub](https://github.com/NONONOexe/rcrs-scenario-hub), including `download_scenario()`, `get_scenarios()`, and `set_hub_url()`/`get_hub_url()`.
