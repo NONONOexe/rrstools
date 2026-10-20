@@ -15,8 +15,10 @@ plot(
   scenario = NULL,
   building_colour = "#f0e7d8",
   building_border = "#121212",
+  building_lwd = 1,
   road_colour = "#dbdbdb",
   road_border = "#121212",
+  road_lwd = 1,
   background_colour = NA,
   ...
 )
@@ -41,6 +43,10 @@ plot(
 
   The border colour of the buildings.
 
+- building_lwd:
+
+  The line width of the building borders.
+
 - road_colour:
 
   The colour of the roads.
@@ -48,6 +54,10 @@ plot(
 - road_border:
 
   The border colour of the roads.
+
+- road_lwd:
+
+  The line width of the road borders.
 
 - background_colour:
 

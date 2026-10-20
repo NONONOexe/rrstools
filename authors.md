@@ -8,12 +8,12 @@
 ## Citation
 
 Ando K (2026). *rrstools: Analyzing RoboCupRescue Simulation Data*. R
-package version 1.1.1, <https://nononoexe.github.io/rrstools/>.
+package version 1.2.0, <https://nononoexe.github.io/rrstools/>.
 
     @Manual{,
       title = {rrstools: Analyzing RoboCupRescue Simulation Data},
       author = {Keisuke Ando},
       year = {2026},
-      note = {R package version 1.1.1},
+      note = {R package version 1.2.0},
       url = {https://nononoexe.github.io/rrstools/},
     }
