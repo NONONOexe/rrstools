@@ -1,3 +1,9 @@
+# rrstools 1.2.0
+
+* `plot.rrs_map()` gains `building_lwd` and `road_lwd` arguments to control
+  the line width of building and road borders. The defaults match the
+  previous appearance.
+
 # rrstools 1.1.1
 
 * `create_face_sf()` no longer fails on maps that contain degenerate

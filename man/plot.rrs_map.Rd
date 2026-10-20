@@ -9,8 +9,10 @@
   scenario = NULL,
   building_colour = "#f0e7d8",
   building_border = "#121212",
+  building_lwd = 1,
   road_colour = "#dbdbdb",
   road_border = "#121212",
+  road_lwd = 1,
   background_colour = NA,
   ...
 )
@@ -25,9 +27,13 @@ from the scenario will be plotted on the map. Defaults to \code{NULL}.}
 
 \item{building_border}{The border colour of the buildings.}
 
+\item{building_lwd}{The line width of the building borders.}
+
 \item{road_colour}{The colour of the roads.}
 
 \item{road_border}{The border colour of the roads.}
+
+\item{road_lwd}{The line width of the road borders.}
 
 \item{background_colour}{The background colour of the plot.}
 

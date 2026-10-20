@@ -62,8 +62,10 @@ print.rrs_map <- function(x, ...) {
 #'   from the scenario will be plotted on the map. Defaults to `NULL`.
 #' @param building_colour The colour of the buildings.
 #' @param building_border The border colour of the buildings.
+#' @param building_lwd The line width of the building borders.
 #' @param road_colour The colour of the roads.
 #' @param road_border The border colour of the roads.
+#' @param road_lwd The line width of the road borders.
 #' @param background_colour The background colour of the plot.
 #' @param ... Additional arguments passed to `plot()`.
 #' @return Invisibly returns \code{NULL} (called for side effects).
@@ -85,14 +87,17 @@ plot.rrs_map <- function(x,
                          scenario = NULL,
                          building_colour   = "#f0e7d8",
                          building_border   = "#121212",
+                         building_lwd      = 1,
                          road_colour       = "#dbdbdb",
                          road_border       = "#121212",
+                         road_lwd          = 1,
                          background_colour = NA,
                          ...) {
   plot(
     get_buildings(x)$geometry,
     col    = building_colour,
     border = building_border,
+    lwd    = building_lwd,
     bg     = background_colour,
     ...
   )
@@ -100,6 +105,7 @@ plot.rrs_map <- function(x,
     get_roads(x)$geometry,
     col    = road_colour,
     border = road_border,
+    lwd    = road_lwd,
     add    = TRUE
   )
 
